@@ -4,36 +4,41 @@ using UnityEngine.InputSystem;
 public class playerMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
+
     private Rigidbody2D rb;
     private Vector2 moveInput;
     private Animator animator;
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    void Awake()
     {
-        rb = GetComponent<Rigidbody2D>(); // get component of whatever this script is attached to
+        rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        rb.linearVelocity = moveInput * moveSpeed;
+        if (rb != null)
+        {
+            rb.linearVelocity = moveInput * moveSpeed;
+        }
     }
 
     public void Move(InputAction.CallbackContext context)
     {
-        animator.SetBool("isMoving", true);
-
-        if (context.canceled)
-        {
-            animator.SetBool("isMoving", false);
-            animator.SetFloat("LastInputX", moveInput.x);
-            animator.SetFloat("LastInputY", moveInput.y);
-        }
-        
         moveInput = context.ReadValue<Vector2>();
-        animator.SetFloat("InputX", moveInput.x);
-        animator.SetFloat("InputY", moveInput.y);
+
+        if (animator != null)
+        {
+            bool isMoving = moveInput != Vector2.zero;
+            animator.SetBool("isMoving", isMoving);
+            animator.SetFloat("InputX", moveInput.x);
+            animator.SetFloat("InputY", moveInput.y);
+
+            if (context.canceled)
+            {
+                animator.SetFloat("LastInputX", moveInput.x);
+                animator.SetFloat("LastInputY", moveInput.y);
+            }
+        }
     }
 }
