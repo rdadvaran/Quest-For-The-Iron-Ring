@@ -273,6 +273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 093718ee29e020149bf006d5fa75f41f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::playerMovement
+  moveSpeed: 5
 --- !u!114 &2103784224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -406,6 +407,28 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &2103784226
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2103784222}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 29ce12255d8529147b0caa0cfe91d186, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &8702496334529543921
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -471,6 +494,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2871005650066808454, guid: b24c195dcab13fc4db44c2d6b130c1f1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2103784223}
+    - targetCorrespondingSourceObject: {fileID: 2871005650066808454, guid: b24c195dcab13fc4db44c2d6b130c1f1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2103784226}
   m_SourcePrefab: {fileID: 100100000, guid: b24c195dcab13fc4db44c2d6b130c1f1, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
