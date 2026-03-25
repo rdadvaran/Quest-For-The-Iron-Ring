@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
@@ -7,8 +8,13 @@ public class NPCInteraction : MonoBehaviour
     [SerializeField] private GameObject dialogueBox;
     [SerializeField] private TMP_Text dialogueText;
     [SerializeField] private GameObject talkPrompt;
+    [SerializeField] private string message = "TA: Welcome to Amit Chakma Engineering Building. Are you ready for your first challenge?";
+    [SerializeField] private float typingSpeed = 0.04f;
 
     private bool playerInRange = false;
+    private bool isDialogueOpen = false;
+    private bool isTyping = false;
+    private Coroutine typingCoroutine;
 
     private void Start()
     {
@@ -17,23 +23,73 @@ public class NPCInteraction : MonoBehaviour
 
         if (talkPrompt != null)
             talkPrompt.SetActive(false);
+
+        if (dialogueText != null)
+            dialogueText.text = "";
     }
 
     private void Update()
     {
         if (playerInRange && Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame)
         {
-            ToggleDialogue();
+            if (!isDialogueOpen)
+            {
+                OpenDialogue();
+            }
+            else
+            {
+                CloseDialogue();
+            }
         }
     }
 
-    private void ToggleDialogue()
+    private void OpenDialogue()
     {
-        if (dialogueBox == null)
+        if (dialogueBox == null || dialogueText == null)
             return;
 
-        bool isActive = dialogueBox.activeSelf;
-        dialogueBox.SetActive(!isActive);
+        dialogueBox.SetActive(true);
+        isDialogueOpen = true;
+
+        if (talkPrompt != null)
+            talkPrompt.SetActive(false);
+
+        if (typingCoroutine != null)
+            StopCoroutine(typingCoroutine);
+
+        typingCoroutine = StartCoroutine(TypeText());
+    }
+
+    private void CloseDialogue()
+    {
+        if (typingCoroutine != null)
+            StopCoroutine(typingCoroutine);
+
+        isTyping = false;
+        isDialogueOpen = false;
+
+        if (dialogueBox != null)
+            dialogueBox.SetActive(false);
+
+        if (dialogueText != null)
+            dialogueText.text = "";
+
+        if (playerInRange && talkPrompt != null)
+            talkPrompt.SetActive(true);
+    }
+
+    private IEnumerator TypeText()
+    {
+        isTyping = true;
+        dialogueText.text = "";
+
+        foreach (char letter in message)
+        {
+            dialogueText.text += letter;
+            yield return new WaitForSeconds(typingSpeed);
+        }
+
+        isTyping = false;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -42,7 +98,7 @@ public class NPCInteraction : MonoBehaviour
         {
             playerInRange = true;
 
-            if (talkPrompt != null)
+            if (!isDialogueOpen && talkPrompt != null)
                 talkPrompt.SetActive(true);
         }
     }
@@ -53,8 +109,17 @@ public class NPCInteraction : MonoBehaviour
         {
             playerInRange = false;
 
+            if (typingCoroutine != null)
+                StopCoroutine(typingCoroutine);
+
+            isTyping = false;
+            isDialogueOpen = false;
+
             if (dialogueBox != null)
                 dialogueBox.SetActive(false);
+
+            if (dialogueText != null)
+                dialogueText.text = "";
 
             if (talkPrompt != null)
                 talkPrompt.SetActive(false);
