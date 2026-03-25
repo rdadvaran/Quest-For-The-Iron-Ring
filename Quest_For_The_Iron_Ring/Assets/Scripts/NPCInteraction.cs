@@ -6,15 +6,17 @@ public class NPCInteraction : MonoBehaviour
 {
     [SerializeField] private GameObject dialogueBox;
     [SerializeField] private TMP_Text dialogueText;
+    [SerializeField] private GameObject talkPrompt;
 
     private bool playerInRange = false;
 
     private void Start()
     {
         if (dialogueBox != null)
-        {
             dialogueBox.SetActive(false);
-        }
+
+        if (talkPrompt != null)
+            talkPrompt.SetActive(false);
     }
 
     private void Update()
@@ -27,10 +29,11 @@ public class NPCInteraction : MonoBehaviour
 
     private void ToggleDialogue()
     {
-        if (dialogueBox == null || dialogueText == null)
+        if (dialogueBox == null)
             return;
 
-        dialogueBox.SetActive(!dialogueBox.activeSelf);
+        bool isActive = dialogueBox.activeSelf;
+        dialogueBox.SetActive(!isActive);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -38,6 +41,9 @@ public class NPCInteraction : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
+
+            if (talkPrompt != null)
+                talkPrompt.SetActive(true);
         }
     }
 
@@ -48,9 +54,10 @@ public class NPCInteraction : MonoBehaviour
             playerInRange = false;
 
             if (dialogueBox != null)
-            {
                 dialogueBox.SetActive(false);
-            }
+
+            if (talkPrompt != null)
+                talkPrompt.SetActive(false);
         }
     }
 }
