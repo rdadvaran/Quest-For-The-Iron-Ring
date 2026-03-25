@@ -603,6 +603,9 @@ MonoBehaviour:
   dialogueBox: {fileID: 2114342402}
   dialogueText: {fileID: 1044811682}
   talkPrompt: {fileID: 142990204}
+  message: 'TA: Welcome to Amit Chakma Engineering Building. Are you ready for your
+    first challenge?'
+  typingSpeed: 0.04
 --- !u!1 &618124457
 GameObject:
   m_ObjectHideFlags: 0
