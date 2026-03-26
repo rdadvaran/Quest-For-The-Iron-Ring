@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CursorMovement : MonoBehaviour
 {
-    public float speed = 150f;
+    public float speed = 50f;
     private RectTransform rect;
 
     void Start()
