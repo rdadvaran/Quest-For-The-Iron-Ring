@@ -14,7 +14,7 @@ public class MainMenuActions : MonoBehaviour
     // Start game
     public void StartGame()
     {
-        SceneManager.LoadScene("HallwayScene");
+        SceneManager.LoadScene("Hallway_Scene");
     }
 
     // Opening menus
