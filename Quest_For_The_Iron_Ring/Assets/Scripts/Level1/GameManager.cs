@@ -2,11 +2,14 @@ using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private Transform cursor;
+    
     [Header("Game Elements")] 
     [Range(2, 9)] 
     [SerializeField] private int difficulty = 4;
@@ -14,19 +17,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform piecePrefab;
     
     [Header("UI Elements")]
-    [SerializeField] private List<Texture2D> imagesTextures;
-    [SerializeField] private Transform levelSelectionPanel;
-    [SerializeField] private Image levelSelectPrefab;
+    [SerializeField] private Texture2D puzzleTexture;
 
     void Start()
     {
-        foreach (Texture2D texture in imagesTextures) {
-            Image image = Instantiate(levelSelectPrefab, levelSelectionPanel);
-            image.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height),Vector2.zero);
-            
-            // assign button action
-            image.GetComponent<Button>().onClick.AddListener(() => StartGame(texture));
-        }
+        StartGame(puzzleTexture);
     }
     
     private  List<Transform> pieces;
@@ -35,43 +30,42 @@ public class GameManager : MonoBehaviour
     private float height;
 
     private Transform draggingPiece = null;
-    private Vector3 offset;
+    //   private Vector3 offset;
     
     //Update is called once per frame
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0)) {
-            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-            if (hit) {
-              //Everything is movable, so we dont need to check its a piece
-              draggingPiece = hit.transform;
-              offset = draggingPiece.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
-              offset += Vector3.back;
-            }
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            TryPickUpPiece();
         }
-        
-        //When we release the mouse button stop dragging.
-        if (draggingPiece && Input.GetMouseButtonUp(0))
+
+        if (draggingPiece != null && Keyboard.current.spaceKey.isPressed)
+        {
+            draggingPiece.position = new Vector3(cursor.position.x, cursor.position.y, -1f);
+        }
+
+        if (draggingPiece != null && Keyboard.current.spaceKey.wasReleasedThisFrame)
         {
             SnapAndDisableIfCorrect();
             draggingPiece.position += Vector3.forward;
             draggingPiece = null;
         }
-        
-        //Set the dragged piece position to the position of the mouse.
-        if (draggingPiece)
+    }
+    
+    private void TryPickUpPiece()
+    {
+        Collider2D hit = Physics2D.OverlapPoint(cursor.position);
+
+        if (hit != null && pieces.Contains(hit.transform))
         {
-            Vector3 newPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            //newPosition.z = draggingPiece.position.z;
-            newPosition += offset;
-            draggingPiece.position = newPosition;
+            draggingPiece = hit.transform;
         }
     }
 
 
     public void StartGame(Texture2D jigsawTexture)
     {
-        levelSelectionPanel.gameObject.SetActive(false);
         //we store a list of the transform for each jigsaw piece so we can track them later
         pieces = new List<Transform>();
         
