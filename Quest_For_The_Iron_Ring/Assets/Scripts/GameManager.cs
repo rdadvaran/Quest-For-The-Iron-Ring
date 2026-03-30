@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -43,6 +44,12 @@ public class GameManager : MonoBehaviour
         
         //Create the pieces of the correct size with the correct texture
         CreateJigsawPieces(jigsawTexture);
+        
+        //Place the pieces randomly into the visible area.
+        Scatter();
+        
+        //Update the border to fit the puzzle
+        UpdateBorder();
     }
 
     Vector2Int GetDimensions(Texture2D jigsawTexture, int difficulty)
@@ -109,6 +116,53 @@ public class GameManager : MonoBehaviour
 
             }
         }
+    }
+
+    private void Scatter()
+    {
+        //Calculate the visible orthographic size of the screen.
+        float orthoHeight = Camera.main.orthographicSize;
+        float screenAspect = (float)Screen.width / Screen.height;
+        float orthoWidth = (orthoHeight * screenAspect);
+        
+        //Ensure pieces are away from the edges
+        float pieceWidth = width * gameHolder.localScale.x;
+        float pieceHeight = height * gameHolder.localScale.y;
+        
+        orthoHeight -= pieceHeight;
+        orthoWidth -= pieceWidth;
+        
+
+        // Place each piece randomly in the visible area
+        foreach (Transform piece in pieces) {
+            float x = Random.Range(-orthoWidth, orthoWidth);
+            float y = Random.Range(-orthoHeight, orthoHeight);
+            piece.position = new Vector3(x,y,-1);
+        }
+    }
+
+    private void UpdateBorder()
+    {
+        LineRenderer lineRenderer = gameHolder.GetComponent<LineRenderer>();
+        
+        // Calculate half sizes to simplify the code
+        float halfWidth = (width * dimensions.x) / 2f;
+        float halfHeight = (height * dimensions.y) / 2f;
+
+        float borderZ = 0f;
+        
+        // Set border vertices, starting top left, going clockwise
+        lineRenderer.SetPosition(0,new Vector3(-halfWidth,halfHeight,borderZ));
+        lineRenderer.SetPosition(1,new Vector3(halfWidth,halfHeight,borderZ));
+        lineRenderer.SetPosition(2,new Vector3(halfWidth,-halfHeight,borderZ));
+        lineRenderer.SetPosition(3,new Vector3(-halfWidth,-halfHeight,borderZ));
+        
+        //Set the thickness of the border line.
+        lineRenderer.startWidth = 0.1f;
+        lineRenderer.endWidth = 0.1f;
+        
+        //Show the border line.
+        lineRenderer.enabled = true;
     }
     
     
