@@ -53,6 +53,7 @@ public class GameManager : MonoBehaviour
         //When we release the mouse button stop dragging.
         if (draggingPiece && Input.GetMouseButtonUp(0))
         {
+            SnapAndDisableIfCorrect();
             draggingPiece.position += Vector3.forward;
             draggingPiece = null;
         }
@@ -198,6 +199,28 @@ public class GameManager : MonoBehaviour
         
         //Show the border line.
         lineRenderer.enabled = true;
+    }
+
+    private void SnapAndDisableIfCorrect() {
+        // We need to know the index of the piece to determine its correct position
+        int pieceIndex = pieces.IndexOf(draggingPiece);
+        
+        // The coordinates of the pieces in the puzzle.
+        int col = pieceIndex % dimensions.x;
+        int row = pieceIndex / dimensions.x;
+        
+        // The target position in the non-scaled coordinates
+        Vector2 targetPosition = new((-width * dimensions.x / 2) + (width * col) + (width / 2),
+            (-height * dimensions.y / 2) + (height * row) + (height / 2));
+        
+        //Check if were in the correct location.
+        if (Vector2.Distance(draggingPiece.localPosition, targetPosition) < (width / 2))
+        {
+            draggingPiece.localPosition = targetPosition;
+            
+            //Disable the collider so we can't click on the object anymore.
+            draggingPiece.GetComponent<BoxCollider2D>().enabled = false;
+        }
     }
     
     
