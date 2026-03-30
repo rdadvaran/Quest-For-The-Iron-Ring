@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
@@ -31,6 +33,37 @@ public class GameManager : MonoBehaviour
     private Vector2Int dimensions;
     private float width;
     private float height;
+
+    private Transform draggingPiece = null;
+    private Vector3 offset;
+    
+    //Update is called once per frame
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0)) {
+            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+            if (hit) {
+              //Everything is movable, so we dont need to check its a piece
+              draggingPiece = hit.transform;
+              offset = draggingPiece.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            }
+        }
+        
+        //When we release the mouse button stop dragging.
+        if (draggingPiece && Input.GetMouseButtonUp(0))
+        {
+            draggingPiece = null;
+        }
+        
+        //Set the dragged piece position to the position of the mouse.
+        if (draggingPiece)
+        {
+            Vector3 newPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            //newPosition.z = draggingPiece.position.z;
+            newPosition += offset;
+            draggingPiece.position = newPosition;
+        }
+    }
 
 
     public void StartGame(Texture2D jigsawTexture)
