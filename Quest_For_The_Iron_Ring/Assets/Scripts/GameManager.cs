@@ -46,12 +46,14 @@ public class GameManager : MonoBehaviour
               //Everything is movable, so we dont need to check its a piece
               draggingPiece = hit.transform;
               offset = draggingPiece.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+              offset += Vector3.back;
             }
         }
         
         //When we release the mouse button stop dragging.
         if (draggingPiece && Input.GetMouseButtonUp(0))
         {
+            draggingPiece.position += Vector3.forward;
             draggingPiece = null;
         }
         
