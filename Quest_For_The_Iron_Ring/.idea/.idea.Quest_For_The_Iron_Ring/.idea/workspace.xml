@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="abfa54dc-0714-4337-9e79-8de0236818d9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Quest_For_The_Iron_Ring/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Quest_For_The_Iron_Ring/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/Border Materiial.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Border Materiial.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/JigsawMaterial.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/JigsawMaterial.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Jigsaw_Puzzle.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Jigsaw_Puzzle.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs.meta" beforeDir="false" />
-    </list>
+    <list default="true" id="abfa54dc-0714-4337-9e79-8de0236818d9" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,6 +12,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/CameraFollow.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="McpProjectServerCommands">
     <commands />
@@ -40,7 +36,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "Level1",
+    "git-widget-placeholder": "Hallway__Extension",
     "junie.onboarding.icon.badge.shown": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -98,6 +94,7 @@
       <option name="presentableId" value="Default" />
       <updated>1774378772698</updated>
       <workItem from="1774378776157" duration="3007000" />
+      <workItem from="1775147791058" duration="24000" />
     </task>
     <servers />
   </component>
@@ -106,7 +103,6 @@
   </component>
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
   <component name="UnityProjectDiscoverer">
-    <option name="hasUnityReference" value="true" />
     <option name="unityProject" value="true" />
     <option name="unityProjectFolder" value="true" />
   </component>
