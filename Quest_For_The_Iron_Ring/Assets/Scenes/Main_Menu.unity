@@ -1519,6 +1519,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIClicker
   cursor: {fileID: 676182898}
+  cursorAnimator: {fileID: 0}
 --- !u!4 &505378407
 Transform:
   m_ObjectHideFlags: 0
@@ -2017,6 +2018,7 @@ GameObject:
   - component: {fileID: 676182901}
   - component: {fileID: 676182900}
   - component: {fileID: 676182899}
+  - component: {fileID: 676182902}
   m_Layer: 5
   m_Name: Cursor
   m_TagString: Untagged
@@ -2056,6 +2058,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
   speed: 800
+  sensitivity: 0.3
 --- !u!114 &676182900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2094,6 +2097,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 676182897}
   m_CullTransparentMesh: 1
+--- !u!114 &676182902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 676182897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 637ee53ec59088446953bfd35c7fc607, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CursorAnimator
+  clickScale: 0.8
+  duration: 0.1
 --- !u!1 &740383826
 GameObject:
   m_ObjectHideFlags: 0
