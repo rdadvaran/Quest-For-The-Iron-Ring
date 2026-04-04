@@ -3,14 +3,23 @@ using TMPro;
 
 public class LevelUIManager : MonoBehaviour
 {
+    [Header("UI References")]
     public TextMeshProUGUI timerText;
     public TextMeshProUGUI piecesText;
 
-    public int totalPieces = 6;
+    [Header("Level Settings")]
+    public int totalPieces = 9;
 
     private int collectedPieces = 0;
     private float timer = 0f;
     private bool timerRunning = true;
+    private bool allPiecesCollected = false;
+
+    private void Start()
+    {
+        UpdatePiecesUI();
+        UpdateTimerUI();
+    }
 
     private void Update()
     {
@@ -26,23 +35,34 @@ public class LevelUIManager : MonoBehaviour
         int minutes = Mathf.FloorToInt(timer / 60f);
         int seconds = Mathf.FloorToInt(timer % 60f);
 
-        timerText.text = "Time: " + minutes.ToString("00") + ":" + seconds.ToString("00");
-    }
-
-    private void Start()
-    {
-        UpdatePiecesUI();
+        if (timerText != null)
+        {
+            timerText.text = "Time: " + minutes.ToString("00") + ":" + seconds.ToString("00");
+        }
     }
 
     private void UpdatePiecesUI()
     {
-        piecesText.text = "Pieces Found: " + collectedPieces + " / " + totalPieces;
+        if (piecesText != null)
+        {
+            piecesText.text = "Pieces Found: " + collectedPieces + " / " + totalPieces;
+        }
     }
 
     public void CollectPiece()
     {
         collectedPieces++;
         UpdatePiecesUI();
+
+        if (collectedPieces >= totalPieces)
+        {
+            allPiecesCollected = true;
+        }
+    }
+
+    public bool AreAllPiecesCollected()
+    {
+        return allPiecesCollected;
     }
 
     public int GetCollectedPieces()
@@ -50,13 +70,13 @@ public class LevelUIManager : MonoBehaviour
         return collectedPieces;
     }
 
+    public float GetCurrentTime()
+    {
+        return timer;
+    }
+
     public void StopTimer()
     {
         timerRunning = false;
-    }
-
-    public float GetTime()
-    {
-        return timer;
     }
 }
