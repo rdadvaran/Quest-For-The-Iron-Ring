@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level1/Level1_Classroom.unity
     guid: 0d86c60341525e94991d3d99035fed9d
+  - enabled: 1
+    path: Assets/Scenes/Level1/Jigsaw_Puzzle.unity
+    guid: 5bc63b6f843b52b459b7b95e8b3ebdc1
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

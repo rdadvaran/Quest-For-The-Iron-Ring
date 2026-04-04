@@ -1,51 +1,47 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using TMPro;
 
 public class PuzzleDeskInteraction : MonoBehaviour
 {
     public string puzzleSceneName = "Jigsaw_Puzzle";
-    public TextMeshProUGUI promptText;
+    public TextMeshProUGUI deskPromptText;
 
     private bool playerInRange = false;
     private LevelUIManager uiManager;
+    private SceneFader sceneFader;
 
     private void Start()
     {
         uiManager = FindFirstObjectByType<LevelUIManager>();
+        sceneFader = FindFirstObjectByType<SceneFader>();
 
-        if (promptText != null)
+        if (deskPromptText != null)
         {
-            promptText.gameObject.SetActive(false);
+            deskPromptText.gameObject.SetActive(false);
         }
     }
 
     private void Update()
     {
-        if (!playerInRange)
-        {
-            HidePrompt();
+        if (deskPromptText == null || uiManager == null)
             return;
-        }
 
-        if (uiManager == null)
+        if (playerInRange && uiManager.AreAllPiecesCollected())
         {
-            HidePrompt();
-            return;
-        }
-
-        if (uiManager.AreAllPiecesCollected())
-        {
-            ShowPrompt("Press E to start puzzle");
+            deskPromptText.gameObject.SetActive(true);
+            deskPromptText.text = "Press E to start puzzle";
 
             if (Input.GetKeyDown(KeyCode.E))
             {
-                SceneManager.LoadScene(puzzleSceneName);
+                if (sceneFader != null)
+                {
+                    sceneFader.FadeToScene(puzzleSceneName);
+                }
             }
         }
         else
         {
-            ShowPrompt("Collect all puzzle pieces first");
+            deskPromptText.gameObject.SetActive(false);
         }
     }
 
@@ -62,24 +58,11 @@ public class PuzzleDeskInteraction : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
-            HidePrompt();
-        }
-    }
 
-    private void ShowPrompt(string message)
-    {
-        if (promptText != null)
-        {
-            promptText.gameObject.SetActive(true);
-            promptText.text = message;
-        }
-    }
-
-    private void HidePrompt()
-    {
-        if (promptText != null)
-        {
-            promptText.gameObject.SetActive(false);
+            if (deskPromptText != null)
+            {
+                deskPromptText.gameObject.SetActive(false);
+            }
         }
     }
 }
