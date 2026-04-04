@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PuzzleSpawnArea : MonoBehaviour
+public class L1ClassroomSpawnArea : MonoBehaviour
 {
     public float width = 1f;
     public float height = 1f;

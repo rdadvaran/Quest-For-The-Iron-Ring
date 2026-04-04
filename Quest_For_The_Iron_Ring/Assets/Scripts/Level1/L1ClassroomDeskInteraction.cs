@@ -1,19 +1,18 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
-public class PuzzleDeskInteraction : MonoBehaviour
+public class L1ClassroomDeskInteraction : MonoBehaviour
 {
-    public string puzzleSceneName = "Jigsaw_Puzzle";
+    public string puzzleSceneName = "L1_JigsawPuzzle";
     public TextMeshProUGUI deskPromptText;
 
     private bool playerInRange = false;
-    private LevelUIManager uiManager;
-    private SceneFader sceneFader;
+    private L1ClassroomUIManager uiManager;
 
     private void Start()
     {
-        uiManager = FindFirstObjectByType<LevelUIManager>();
-        sceneFader = FindFirstObjectByType<SceneFader>();
+        uiManager = FindFirstObjectByType<L1ClassroomUIManager>();
 
         if (deskPromptText != null)
         {
@@ -33,10 +32,7 @@ public class PuzzleDeskInteraction : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.E))
             {
-                if (sceneFader != null)
-                {
-                    sceneFader.FadeToScene(puzzleSceneName);
-                }
+                SceneManager.LoadScene(puzzleSceneName);
             }
         }
         else

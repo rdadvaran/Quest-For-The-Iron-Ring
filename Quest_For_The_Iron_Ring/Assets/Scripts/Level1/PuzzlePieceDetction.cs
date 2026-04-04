@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class PuzzlePieceDetection : MonoBehaviour
+public class L1PuzzlePiece : MonoBehaviour
 {
-    private LevelUIManager uiManager;
+    private L1ClassroomUIManager uiManager;
 
     private void Start()
     {
-        uiManager = FindFirstObjectByType<LevelUIManager>();
+        uiManager = FindFirstObjectByType<L1ClassroomUIManager>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)

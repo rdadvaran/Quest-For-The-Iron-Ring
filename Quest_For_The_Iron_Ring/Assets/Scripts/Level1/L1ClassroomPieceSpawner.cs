@@ -1,19 +1,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PuzzlePieceSpawner : MonoBehaviour
+public class L1ClassroomPieceSpawner : MonoBehaviour
 {
     public GameObject puzzlePiecePrefab;
     public Transform spawnAreaParent;
     public int numberOfPiecesToSpawn = 6;
 
-    private List<PuzzleSpawnArea> spawnAreas = new List<PuzzleSpawnArea>();
+    private List<L1ClassroomSpawnArea> spawnAreas = new List<L1ClassroomSpawnArea>();
 
     private void Start()
     {
         foreach (Transform child in spawnAreaParent)
         {
-            PuzzleSpawnArea area = child.GetComponent<PuzzleSpawnArea>();
+            L1ClassroomSpawnArea area = child.GetComponent<L1ClassroomSpawnArea>();
             if (area != null)
             {
                 spawnAreas.Add(area);
@@ -25,7 +25,7 @@ public class PuzzlePieceSpawner : MonoBehaviour
 
     private void SpawnPuzzlePieces()
     {
-        List<PuzzleSpawnArea> availableAreas = new List<PuzzleSpawnArea>(spawnAreas);
+        List<L1ClassroomSpawnArea> availableAreas = new List<L1ClassroomSpawnArea>(spawnAreas);
 
         if (numberOfPiecesToSpawn > availableAreas.Count)
         {
@@ -35,7 +35,7 @@ public class PuzzlePieceSpawner : MonoBehaviour
         for (int i = 0; i < numberOfPiecesToSpawn; i++)
         {
             int randomIndex = Random.Range(0, availableAreas.Count);
-            PuzzleSpawnArea chosenArea = availableAreas[randomIndex];
+            L1ClassroomSpawnArea chosenArea = availableAreas[randomIndex];
 
             Vector2 spawnPosition = chosenArea.GetRandomPosition();
 
