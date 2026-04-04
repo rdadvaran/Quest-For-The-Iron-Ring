@@ -1,11 +1,12 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using System.Collections;
 
-public class CursorAnimator : MonoBehaviour
+public class UIButtonAnimator : MonoBehaviour, IPointerClickHandler
 {
-    public float clickScale = 0.6f;
-    public float duration = 0.2f;
-    
+    public float clickScale = 1.1f;
+    public float duration = 0.1f;
+
     private Vector3 originalScale;
     private bool isAnimating = false;
 
@@ -14,10 +15,8 @@ public class CursorAnimator : MonoBehaviour
         originalScale = transform.localScale;
     }
 
-    public void PlayClickAnimation()
+    public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("Cursor animation triggered");
-
         if (!isAnimating)
         {
             StartCoroutine(ClickAnimation());
