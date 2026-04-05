@@ -5,8 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="abfa54dc-0714-4337-9e79-8de0236818d9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Level1/GlobalGameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Level1/GlobalGameManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Quest_For_The_Iron_Ring/.idea/indexLayout.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Level1/L1_JigsawPuzzle.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Level1/L1_JigsawPuzzle.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Level1/L1JigsawUIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Level1/L1JigsawUIManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Bangers SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Bangers SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Oswald Bold SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Oswald Bold SDF.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,6 +106,7 @@
       <workItem from="1774378776157" duration="3007000" />
       <workItem from="1775260838662" duration="14524000" />
       <workItem from="1775356662834" duration="428000" />
+      <workItem from="1775399247374" duration="465000" />
     </task>
     <servers />
   </component>

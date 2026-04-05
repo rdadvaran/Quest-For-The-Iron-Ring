@@ -32,9 +32,8 @@ public class L1JigsawUIManager : MonoBehaviour
     private void Update()
     {
         UpdateTimerUI();
-
-        // Optional: allow Enter key to go back after finishing
-        if (levelComplete && Input.GetKeyDown(KeyCode.Return))
+        
+        if (levelComplete && Input.GetKeyDown(KeyCode.E))
         {
             ReturnToHallway();
         }
