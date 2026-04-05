@@ -4,7 +4,7 @@ public class GlobalGameManager : MonoBehaviour
 {
     public static GlobalGameManager Instance;
 
-    // Shared timer across classroom + jigsaw scenes
+    // Shared timer across classroom and jigsaw scenes
     public float totalTime = 0f;
     public bool timerRunning = true;
 
@@ -12,6 +12,10 @@ public class GlobalGameManager : MonoBehaviour
     public int totalPieces = 9;
     public int collectedPieces = 0;
     public int correctPlacements = 0;
+
+    // Final result data
+    public string finalGrade = "";
+    public bool puzzleCompleted = false;
 
     private void Awake()
     {
@@ -38,12 +42,24 @@ public class GlobalGameManager : MonoBehaviour
     {
         totalTime = 0f;
         timerRunning = true;
+        totalPieces = 9;
         collectedPieces = 0;
         correctPlacements = 0;
+        finalGrade = "";
+        puzzleCompleted = false;
     }
 
     public void StopTimer()
     {
         timerRunning = false;
+    }
+
+    public string CalculateGrade()
+    {
+        if (totalTime < 90f) return "A";
+        if (totalTime < 120f) return "B";
+        if (totalTime < 150f) return "C";
+        if (totalTime < 180f) return "D";
+        return "F";
     }
 }

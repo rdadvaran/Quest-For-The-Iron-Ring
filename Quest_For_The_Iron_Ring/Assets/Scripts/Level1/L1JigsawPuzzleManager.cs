@@ -13,8 +13,10 @@ public class L1JigsawPuzzleManager : MonoBehaviour
     [SerializeField] private Transform gameHolder;
     [SerializeField] private Transform piecePrefab;
 
-    [Header("UI Elements")]
+    [Header("Puzzle Data")]
     [SerializeField] private Texture2D puzzleTexture;
+
+    [Header("UI")]
     [SerializeField] private L1JigsawUIManager puzzleUIManager;
 
     private List<Transform> pieces;
@@ -23,11 +25,25 @@ public class L1JigsawPuzzleManager : MonoBehaviour
     private float height;
 
     private Transform draggingPiece = null;
-    private int correctPlacements = 0;
 
     private void Start()
     {
+        if (GlobalGameManager.Instance != null)
+        {
+            GlobalGameManager.Instance.correctPlacements = 0;
+        }
+
         StartGame(puzzleTexture);
+
+        if (GlobalGameManager.Instance != null)
+        {
+            GlobalGameManager.Instance.totalPieces = pieces.Count;
+        }
+
+        if (puzzleUIManager != null)
+        {
+            puzzleUIManager.UpdateCorrectUI();
+        }
     }
 
     private void Update()
@@ -71,25 +87,25 @@ public class L1JigsawPuzzleManager : MonoBehaviour
         UpdateBorder();
     }
 
-    Vector2Int GetDimensions(Texture2D jigsawTexture, int difficulty)
+    private Vector2Int GetDimensions(Texture2D jigsawTexture, int difficulty)
     {
-        Vector2Int dimensions = Vector2Int.zero;
+        Vector2Int dims = Vector2Int.zero;
 
         if (jigsawTexture.width < jigsawTexture.height)
         {
-            dimensions.x = difficulty;
-            dimensions.y = (difficulty * jigsawTexture.height) / jigsawTexture.width;
+            dims.x = difficulty;
+            dims.y = (difficulty * jigsawTexture.height) / jigsawTexture.width;
         }
         else
         {
-            dimensions.x = (difficulty * jigsawTexture.width) / jigsawTexture.height;
-            dimensions.y = difficulty;
+            dims.x = (difficulty * jigsawTexture.width) / jigsawTexture.height;
+            dims.y = difficulty;
         }
 
-        return dimensions;
+        return dims;
     }
 
-    void CreateJigsawPieces(Texture2D jigsawTexture)
+    private void CreateJigsawPieces(Texture2D jigsawTexture)
     {
         height = 1f / dimensions.y;
         float aspect = (float)jigsawTexture.width / jigsawTexture.height;
@@ -100,10 +116,11 @@ public class L1JigsawPuzzleManager : MonoBehaviour
             for (int col = 0; col < dimensions.x; col++)
             {
                 Transform piece = Instantiate(piecePrefab, gameHolder);
+
                 piece.localPosition = new Vector3(
                     (-width * dimensions.x / 2) + (width * col) + (width / 2),
                     (-height * dimensions.y / 2) + (height * row) + (height / 2),
-                    -1
+                    -1f
                 );
 
                 piece.localScale = new Vector3(width, height, 1f);
@@ -143,7 +160,7 @@ public class L1JigsawPuzzleManager : MonoBehaviour
         {
             float x = Random.Range(-orthoWidth, orthoWidth);
             float y = Random.Range(-orthoHeight, orthoHeight);
-            piece.position = new Vector3(x, y, -1);
+            piece.position = new Vector3(x, y, -1f);
         }
     }
 
@@ -167,6 +184,8 @@ public class L1JigsawPuzzleManager : MonoBehaviour
 
     private void SnapAndDisableIfCorrect()
     {
+        if (draggingPiece == null) return;
+
         int pieceIndex = pieces.IndexOf(draggingPiece);
 
         int col = pieceIndex % dimensions.x;
@@ -181,12 +200,11 @@ public class L1JigsawPuzzleManager : MonoBehaviour
         {
             BoxCollider2D pieceCollider = draggingPiece.GetComponent<BoxCollider2D>();
 
+            // Only count the piece once
             if (pieceCollider != null && pieceCollider.enabled)
             {
                 draggingPiece.localPosition = targetPosition;
                 pieceCollider.enabled = false;
-
-                correctPlacements++;
 
                 if (puzzleUIManager != null)
                 {
@@ -194,9 +212,12 @@ public class L1JigsawPuzzleManager : MonoBehaviour
                 }
 
                 if (GlobalGameManager.Instance != null &&
-                    correctPlacements >= GlobalGameManager.Instance.totalPieces)
+                    GlobalGameManager.Instance.correctPlacements >= pieces.Count)
                 {
-                    GlobalGameManager.Instance.StopTimer();
+                    if (puzzleUIManager != null)
+                    {
+                        puzzleUIManager.ShowFinishPanel();
+                    }
                 }
             }
         }
