@@ -8,8 +8,8 @@ public class MainMenuActions : MonoBehaviour
     public GameObject infoMenuPanel;
     public GameObject difficultyMenuPanel;
 
-    public string selectedCharacter = "";
-    public string selectedDifficulty = "";
+    public string selectedCharacter = "Basic";
+    public string selectedDifficulty = "Average Joe";
 
     // Start game
     public void StartGame()
