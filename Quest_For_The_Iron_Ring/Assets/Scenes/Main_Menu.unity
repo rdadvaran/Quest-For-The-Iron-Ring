@@ -3160,7 +3160,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &836396291
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3417,7 +3417,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!81 &1121769719
 AudioListener:
   m_ObjectHideFlags: 0
@@ -4292,22 +4292,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92621355978557a41b82a9f8b1c82e37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterPreviewUpdater
-  previewImage: {fileID: 1815477468}
-  characterSprites:
-  - characterName: Basic
-    sprite: {fileID: 7027208104975416815, guid: f908280f355785045b1380ede4f060a4, type: 3}
-  - characterName: Artist
-    sprite: {fileID: -7837347082401310983, guid: 0369d83f2c19ddb438d3625433a1f436, type: 3}
-  - characterName: Hacker
-    sprite: {fileID: 6138175509220646202, guid: 591cd4913cc2e6c4ba60dcb2b95d48fa, type: 3}
-  - characterName: Gamer
-    sprite: {fileID: 6777152947538414640, guid: b216d38f50248d8489980f718c186453, type: 3}
-  - characterName: Jock
-    sprite: {fileID: 3055218471517139758, guid: 384bdbbef6b5deb468b32a81f6461a55, type: 3}
-  - characterName: Gym Rat
-    sprite: {fileID: -1536078643218101449, guid: 31d06c56a578d7c419b6b76e9ecfc16e, type: 3}
-  - characterName: AI
-    sprite: {fileID: 1007468640539218048, guid: f2b569c11a185de479c0e314ee231c21, type: 3}
 --- !u!4 &1797782152
 Transform:
   m_ObjectHideFlags: 0
