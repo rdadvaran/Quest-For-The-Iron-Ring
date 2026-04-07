@@ -1,0 +1,111 @@
+using UnityEngine;
+using TMPro;
+
+public class GameManager : MonoBehaviour
+{
+    public static GameManager Instance;
+
+    [SerializeField] private float timer = 60f;
+    [SerializeField] private int burnoutLevel = 0;
+    [SerializeField] private int maxBurnout = 5;
+    [SerializeField] private int bugsSquashed = 0;
+
+    [SerializeField] private TMP_Text timerText;
+    [SerializeField] private TMP_Text scoreText;
+    [SerializeField] private TMP_Text burnoutText;
+
+    private bool gameEnded = false;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+    }
+
+    private void Update()
+    {
+        if (gameEnded)
+            return;
+
+        timer -= Time.deltaTime;
+
+        if (timer <= 0f)
+        {
+            timer = 0f;
+            burnoutLevel = maxBurnout;
+            EndGame("Time ran out!");
+        }
+
+        UpdateUI();
+    }
+
+    private void UpdateUI()
+    {
+        if (timerText != null)
+            timerText.text = "TIME: " + Mathf.CeilToInt(timer);
+
+        if (scoreText != null)
+            scoreText.text = "SCORE: " + bugsSquashed;
+
+        if (burnoutText != null)
+            burnoutText.text = "BURNOUT: " + burnoutLevel + "/" + maxBurnout;
+    }
+
+    public void AddScore(int amount)
+    {
+        if (gameEnded) return;
+
+        bugsSquashed += amount;
+        UpdateUI();
+    }
+
+    public void AddBurnout(int amount)
+    {
+        if (gameEnded) return;
+
+        burnoutLevel += amount;
+
+        if (burnoutLevel > maxBurnout)
+            burnoutLevel = maxBurnout;
+
+        if (burnoutLevel >= maxBurnout)
+        {
+            EndGame("Max burnout reached!");
+        }
+
+        UpdateUI();
+    }
+
+    public void ReduceBurnout(int amount)
+    {
+        if (gameEnded) return;
+
+        burnoutLevel -= amount;
+
+        if (burnoutLevel < 0)
+            burnoutLevel = 0;
+
+        UpdateUI();
+    }
+
+    public void AddTime(float amount)
+    {
+        if (gameEnded) return;
+
+        timer += amount;
+        UpdateUI();
+    }
+
+    private void EndGame(string reason)
+    {
+        gameEnded = true;
+        UpdateUI();
+        Debug.Log("Game Over: " + reason);
+        Time.timeScale = 0f;
+    }
+}
