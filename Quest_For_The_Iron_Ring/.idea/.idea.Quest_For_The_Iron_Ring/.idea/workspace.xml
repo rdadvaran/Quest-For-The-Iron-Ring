@@ -5,28 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="abfa54dc-0714-4337-9e79-8de0236818d9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/AI_Player/AI_IdleDown.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/AI_Player/AI_IdleDown.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/AI_Player/AI_IdleDown.anim.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/AI_Player/AI_IdleDown.anim.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/AI_Player/AI_IdleLeft.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/AI_Player/AI_IdleLeft.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/AI_Player/AI_IdleLeft.anim.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/AI_Player/AI_IdleLeft.anim.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/AI_Player/AI_IdleRight.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/AI_Player/AI_IdleRight.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/AI_Player/AI_IdleRight.anim.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/AI_Player/AI_IdleRight.anim.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/AI_Player/AI_IdleUp.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/AI_Player/AI_IdleUp.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/AI_Player/AI_IdleUp.anim.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/AI_Player/AI_IdleUp.anim.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/AI_Player/AI_Player.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/AI_Player/AI_Player.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/AI_Player/AI_Player.controller.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/AI_Player/AI_Player.controller.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/AI_Player/AI_WalkDown.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/AI_Player/AI_WalkDown.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/AI_Player/AI_WalkDown.anim.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/AI_Player/AI_WalkDown.anim.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/AI_Player/AI_WalkLeft.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/AI_Player/AI_WalkLeft.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/AI_Player/AI_WalkLeft.anim.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/AI_Player/AI_WalkLeft.anim.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/AI_Player/AI_WalkRight.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/AI_Player/AI_WalkRight.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/AI_Player/AI_WalkRight.anim.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/AI_Player/AI_WalkRight.anim.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/AI_Player/AI_WalkUp.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/AI_Player/AI_WalkUp.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/AI_Player/AI_WalkUp.anim.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/AI_Player/AI_WalkUp.anim.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/AI_Player/Player Override_AI.overrideController" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/AI_Player/Player Override_AI.overrideController.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/AI_Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/AI_Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Quest_For_The_Iron_Ring/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Quest_For_The_Iron_Ring/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Hallway_Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Hallway_Scene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main_Menu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main_Menu.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MainMenuScripts/MainMenuActions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MainMenuScripts/MainMenuActions.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +20,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/CameraFollow.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/CharacterSpawner.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="McpProjectServerCommands">
     <commands />
