@@ -5,7 +5,7 @@ public class Bug : MonoBehaviour
     [Header("Bug Stats")]
     [SerializeField] private float speed = 2f;
     [SerializeField] private int burnoutDamage = 1;
-    [SerializeField] private int scoreValue = 1;
+    [SerializeField] private float scoreValue = 1f;
     [SerializeField] private int health = 1;
 
     [Header("Animation Frames")]
@@ -35,7 +35,7 @@ public class Bug : MonoBehaviour
     private FacingDirection currentFacing = FacingDirection.Down;
     private FacingDirection lastFacing = FacingDirection.Down;
 
-    private void Start()
+    protected virtual void Start()
     {
         direction = Random.insideUnitCircle.normalized;
 
@@ -132,7 +132,7 @@ public class Bug : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Wall"))
         {
@@ -157,7 +157,7 @@ public class Bug : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int amount)
+    public virtual void TakeDamage(int amount)
     {
         health -= amount;
 

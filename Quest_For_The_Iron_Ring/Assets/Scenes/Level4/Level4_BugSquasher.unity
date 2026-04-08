@@ -565,6 +565,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 270343359}
   m_CullTransparentMesh: 1
+--- !u!1 &330937548 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4077846409619536098, guid: d0efff5a47dce418eb1a1e84ce3887d4, type: 3}
+  m_PrefabInstance: {fileID: 99844570626638229}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &411018155
 GameObject:
   m_ObjectHideFlags: 0
@@ -2018,8 +2023,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -310, y: -210}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -260, y: -210}
+  m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1911405301
 MonoBehaviour:
@@ -2284,12 +2289,74 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BugSpawner
   normalBugPrefab: {fileID: 7059668936970595980, guid: 9ebbb6f10e61e4691a624bd09a525001, type: 3}
-  spawnInterval: 3
-  maxBugs: 5
+  fastBugPrefab: {fileID: 330937548}
+  spawnInterval: 2
+  maxBugs: 8
   minX: -9.3
   maxX: 7
   minY: -5
   maxY: 1.1
+--- !u!1001 &99844570626638229
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3548142768840245416, guid: d0efff5a47dce418eb1a1e84ce3887d4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -13.84516
+      objectReference: {fileID: 0}
+    - target: {fileID: 3548142768840245416, guid: d0efff5a47dce418eb1a1e84ce3887d4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.39364
+      objectReference: {fileID: 0}
+    - target: {fileID: 3548142768840245416, guid: d0efff5a47dce418eb1a1e84ce3887d4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3548142768840245416, guid: d0efff5a47dce418eb1a1e84ce3887d4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3548142768840245416, guid: d0efff5a47dce418eb1a1e84ce3887d4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3548142768840245416, guid: d0efff5a47dce418eb1a1e84ce3887d4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3548142768840245416, guid: d0efff5a47dce418eb1a1e84ce3887d4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3548142768840245416, guid: d0efff5a47dce418eb1a1e84ce3887d4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3548142768840245416, guid: d0efff5a47dce418eb1a1e84ce3887d4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3548142768840245416, guid: d0efff5a47dce418eb1a1e84ce3887d4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3648759030203246593, guid: d0efff5a47dce418eb1a1e84ce3887d4, type: 3}
+      propertyPath: speed
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4077846409619536098, guid: d0efff5a47dce418eb1a1e84ce3887d4, type: 3}
+      propertyPath: m_Name
+      value: FastBug
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d0efff5a47dce418eb1a1e84ce3887d4, type: 3}
 --- !u!1001 &1461278839293253069
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2363,3 +2430,4 @@ SceneRoots:
   - {fileID: 1196890166}
   - {fileID: 1507961701}
   - {fileID: 1461278839293253069}
+  - {fileID: 99844570626638229}

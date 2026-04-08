@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float timer = 60f;
     [SerializeField] private int burnoutLevel = 0;
     [SerializeField] private int maxBurnout = 5;
-    [SerializeField] private int bugsSquashed = 0;
+    [SerializeField] private float bugsSquashed = 0f;
 
     [SerializeField] private TMP_Text timerText;
     [SerializeField] private TMP_Text scoreText;
@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Image burnoutMeterImage;
     [SerializeField] private Sprite[] burnoutMeterSprites;
+    
+    private int fastBugHitCounter = 0;
+    private int fastBugKillCounter = 0;
 
     private bool gameEnded = false;
 
@@ -59,7 +62,7 @@ public class GameManager : MonoBehaviour
             timerText.text = "TIME: " + Mathf.CeilToInt(timer);
 
         if (scoreText != null)
-            scoreText.text = "SCORE: " + bugsSquashed;
+            scoreText.text = "SCORE: " + (bugsSquashed % 1 == 0 ? bugsSquashed.ToString("0") : bugsSquashed.ToString("0.0"));
 
         if (burnoutText != null)
             burnoutText.text = "BURNOUT: " + burnoutLevel + "/" + maxBurnout;
@@ -70,7 +73,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void AddScore(int amount)
+    public void AddScore(float amount)
     {
         if (gameEnded) return;
 
@@ -126,5 +129,31 @@ public class GameManager : MonoBehaviour
     public int GetBurnoutLevel()
     {
         return burnoutLevel;
+    }
+    
+    public void RegisterFastBugHit()
+    {
+        if (gameEnded) return;
+
+        fastBugHitCounter++;
+
+        if (fastBugHitCounter >= 2)
+        {
+            fastBugHitCounter = 0;
+            AddBurnout(1);
+        }
+    }
+
+    public void RegisterFastBugKill()
+    {
+        if (gameEnded) return;
+
+        fastBugKillCounter++;
+
+        if (fastBugKillCounter >= 2)
+        {
+            fastBugKillCounter = 0;
+            AddScore(1);
+        }
     }
 }

@@ -3,6 +3,8 @@ using UnityEngine;
 public class BugSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject normalBugPrefab;
+    [SerializeField] private GameObject fastBugPrefab;
+
     [SerializeField] private float spawnInterval = 3f;
     [SerializeField] private int maxBugs = 5;
 
@@ -30,12 +32,52 @@ public class BugSpawner : MonoBehaviour
 
     private void SpawnBug()
     {
-        Vector2 randomPosition = new Vector2(
-            Random.Range(minX, maxX),
-            Random.Range(minY, maxY)
-        );
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        Vector2 spawnPosition = Vector2.zero;
+        bool validPosition = false;
 
-        Instantiate(normalBugPrefab, randomPosition, Quaternion.identity);
+        int attempts = 0;
+        float minimumDistanceFromPlayer = 2.5f;
+
+        while (!validPosition && attempts < 20)
+        {
+            spawnPosition = new Vector2(
+                Random.Range(minX, maxX),
+                Random.Range(minY, maxY)
+            );
+
+            if (player == null)
+            {
+                validPosition = true;
+            }
+            else
+            {
+                float distance = Vector2.Distance(spawnPosition, player.transform.position);
+                if (distance >= minimumDistanceFromPlayer)
+                {
+                    validPosition = true;
+                }
+            }
+
+            attempts++;
+        }
+
+        if (!validPosition)
+            return;
+
+        float randomValue = Random.value;
+        GameObject bugToSpawn;
+
+        if (randomValue < 0.5f || fastBugPrefab == null)
+        {
+            bugToSpawn = normalBugPrefab;
+        }
+        else
+        {
+            bugToSpawn = fastBugPrefab;
+        }
+
+        Instantiate(bugToSpawn, spawnPosition, Quaternion.identity);
     }
 
     private void OnDrawGizmos()
