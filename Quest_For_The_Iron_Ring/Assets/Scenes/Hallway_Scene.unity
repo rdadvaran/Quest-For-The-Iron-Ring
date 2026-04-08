@@ -1068,6 +1068,7 @@ GameObject:
   - component: {fileID: 583300748}
   - component: {fileID: 583300749}
   - component: {fileID: 583300750}
+  - component: {fileID: 583300751}
   m_Layer: 0
   m_Name: TA_NPC_L1
   m_TagString: Untagged
@@ -1256,7 +1257,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 583300743}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 665c029f11751421eaec95b2501c36c7, type: 3}
   m_Name: 
@@ -1272,6 +1273,32 @@ MonoBehaviour:
     final grade will depend on your time. Are you ready to start Task 1? (Y/N)'
   typingSpeed: 0.02
   sceneToLoad: L1_Clasroom
+--- !u!114 &583300751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 583300743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97861372e062f524b8b3b1f6c4935a5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Level1NPCInteraction
+  dialogueBox: {fileID: 2114342402}
+  dialogueText: {fileID: 1044811682}
+  talkPrompt: {fileID: 142990204}
+  message: 'TA: Welcome to Amit Chakma Engineering Building. Your first challenge
+    is to explore the classroom and collect all of the missing orange puzzle pieces.
+    Once you have found them all, return to the desk and complete the UML diagram
+    puzzle. In software design, UML is the blueprint for your code, so if it is not
+    designed correctly, everything that follows can go wrong. Be quick, because your
+    final grade will depend on your time. Are you ready to start Task 1? (Y/N)'
+  passedMessage: 'TA: You already passed this level, so you do not need to do it
+    again.'
+  typingSpeed: 0.02
+  sceneToLoad: L1_Clasroom
+  levelKey: Level1Passed
 --- !u!1 &618124457
 GameObject:
   m_ObjectHideFlags: 0
