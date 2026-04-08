@@ -446,7 +446,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LevelUIManager
   timerText: {fileID: 1513511704}
   piecesText: {fileID: 531414859}
-  totalPieces: 9
+  pieceSpawner: {fileID: 1395482330}
 --- !u!4 &237023930
 Transform:
   m_ObjectHideFlags: 0
@@ -10694,6 +10694,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PuzzlePieceSpawner
   puzzlePiecePrefab: {fileID: 3585906751475898753, guid: f7168433d78f82b419ddf45742c97e10, type: 3}
   spawnAreaParent: {fileID: 1299189237}
+  idleSlackerPieces: 4
+  averageJoePieces: 6
+  goodie2ShoesPieces: 8
+  perfectionistPieces: 10
   numberOfPiecesToSpawn: 9
 --- !u!4 &1395482331
 Transform:

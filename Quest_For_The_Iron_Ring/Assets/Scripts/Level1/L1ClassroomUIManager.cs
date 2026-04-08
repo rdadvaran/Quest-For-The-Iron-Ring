@@ -7,13 +7,24 @@ public class L1ClassroomUIManager : MonoBehaviour
     public TextMeshProUGUI timerText;
     public TextMeshProUGUI piecesText;
 
-    [Header("Level Settings")]
-    public int totalPieces = 9;
+    [Header("References")]
+    public L1ClassroomPieceSpawner pieceSpawner;
 
+    private int totalPieces = 0;
     private bool allPiecesCollected = false;
 
     private void Start()
     {
+        if (pieceSpawner != null)
+        {
+            totalPieces = pieceSpawner.GetPieceCount();
+        }
+        else
+        {
+            totalPieces = 6;
+            Debug.LogWarning("PieceSpawner reference is missing in L1ClassroomUIManager.");
+        }
+
         if (GlobalGameManager.Instance != null)
         {
             GlobalGameManager.Instance.totalPieces = totalPieces;
@@ -64,5 +75,10 @@ public class L1ClassroomUIManager : MonoBehaviour
     public bool AreAllPiecesCollected()
     {
         return allPiecesCollected;
+    }
+
+    public int GetTotalPieces()
+    {
+        return totalPieces;
     }
 }
