@@ -1,5 +1,7 @@
 using UnityEngine;
 
+using UnityEngine;
+
 public class CameraFollow : MonoBehaviour
 {
     [SerializeField] private Transform target;
@@ -11,7 +13,18 @@ public class CameraFollow : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (target == null) return;
+        if (target == null)
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null)
+            {
+                target = player.transform;
+            }
+            else
+            {
+                return;
+            }
+        }
 
         float clampedX = Mathf.Clamp(target.position.x, minX, maxX);
         Vector3 desiredPosition = new Vector3(clampedX, fixedY, fixedZ);

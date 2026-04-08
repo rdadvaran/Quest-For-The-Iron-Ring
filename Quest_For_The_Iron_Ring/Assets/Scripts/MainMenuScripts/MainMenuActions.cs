@@ -8,14 +8,18 @@ public class MainMenuActions : MonoBehaviour
     public GameObject infoMenuPanel;
     public GameObject difficultyMenuPanel;
 
-    public string selectedCharacter = "Basic";
-    public string selectedDifficulty = "Average Joe";
-
     // Start game
     public void StartGame()
     {
+        if (GameSession.Instance != null)
+        {
+            Debug.Log("Starting game with character: " + GameSession.Instance.selectedCharacter);
+            Debug.Log("Starting game with difficulty: " + GameSession.Instance.selectedDifficulty);
+        }
+
         SceneManager.LoadScene("Hallway_Scene");
     }
+
 
     // Opening menus
     public void OpenCharacterMenu()
@@ -44,15 +48,24 @@ public class MainMenuActions : MonoBehaviour
     // Character selection logic
     public void SelectCharacter(string character)
     {
-        selectedCharacter = character;
-        Debug.Log("Selected Character: " + selectedCharacter);
+        if (GameSession.Instance != null)
+        {
+            GameSession.Instance.selectedCharacter = character;
+        }
+
+        Debug.Log("Selected Character: " + character);
     }
 
+    
     // Difficulty selection logic
     public void SelectDifficulty(string difficulty)
     {
-        selectedDifficulty = difficulty;
-        Debug.Log("Selected Difficulty: " + selectedDifficulty);
+        if (GameSession.Instance != null)
+        {
+            GameSession.Instance.selectedDifficulty = difficulty;
+        }
+
+        Debug.Log("Selected Difficulty: " + difficulty);
     }
 
     //To keep character and difficulty variables
