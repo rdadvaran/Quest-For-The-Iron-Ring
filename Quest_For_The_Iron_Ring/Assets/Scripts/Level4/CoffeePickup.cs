@@ -2,14 +2,20 @@ using UnityEngine;
 
 public class CoffeePickup : MonoBehaviour
 {
-    [SerializeField] private int restoreAmount = 20;
+    [SerializeField] private int reduceBurnoutAmount = 1;
+    [SerializeField] private float timeBonus = 20f;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("Player"))
             return;
 
-        Debug.Log("Coffee picked up! Restore amount: " + restoreAmount);
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.ReduceBurnout(reduceBurnoutAmount);
+            GameManager.Instance.AddTime(timeBonus);
+        }
+
         Destroy(gameObject);
     }
 }

@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TMP_Text scoreText;
     [SerializeField] private TMP_Text burnoutText;
 
+    [SerializeField] private Image burnoutMeterImage;
+    [SerializeField] private Sprite[] burnoutMeterSprites;
+
     private bool gameEnded = false;
 
     private void Awake()
@@ -25,6 +29,11 @@ public class GameManager : MonoBehaviour
         }
 
         Instance = this;
+    }
+
+    private void Start()
+    {
+        UpdateUI();
     }
 
     private void Update()
@@ -54,6 +63,11 @@ public class GameManager : MonoBehaviour
 
         if (burnoutText != null)
             burnoutText.text = "BURNOUT: " + burnoutLevel + "/" + maxBurnout;
+
+        if (burnoutMeterImage != null && burnoutMeterSprites != null && burnoutLevel >= 0 && burnoutLevel < burnoutMeterSprites.Length)
+        {
+            burnoutMeterImage.sprite = burnoutMeterSprites[burnoutLevel];
+        }
     }
 
     public void AddScore(int amount)
@@ -107,5 +121,10 @@ public class GameManager : MonoBehaviour
         UpdateUI();
         Debug.Log("Game Over: " + reason);
         Time.timeScale = 0f;
+    }
+
+    public int GetBurnoutLevel()
+    {
+        return burnoutLevel;
     }
 }
