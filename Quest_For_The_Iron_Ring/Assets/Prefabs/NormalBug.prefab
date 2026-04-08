@@ -352,7 +352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2d38b8c580ce4778967bfe2c2859930, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bug
-  speed: 2
+  speed: 3
   burnoutDamage: 1
   scoreValue: 1
   health: 1

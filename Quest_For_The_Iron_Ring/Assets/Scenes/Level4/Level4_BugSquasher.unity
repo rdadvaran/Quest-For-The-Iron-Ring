@@ -2290,8 +2290,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BugSpawner
   normalBugPrefab: {fileID: 7059668936970595980, guid: 9ebbb6f10e61e4691a624bd09a525001, type: 3}
   fastBugPrefab: {fileID: 330937548}
-  spawnInterval: 2
-  maxBugs: 8
+  spawnInterval: 1
+  maxBugs: 10
   minX: -9.3
   maxX: 7
   minY: -5

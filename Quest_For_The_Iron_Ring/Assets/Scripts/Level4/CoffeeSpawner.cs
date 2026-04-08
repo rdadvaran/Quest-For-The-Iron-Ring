@@ -30,12 +30,43 @@ public class CoffeeSpawner : MonoBehaviour
 
     private void SpawnCoffee()
     {
-        Vector2 randomPosition = new Vector2(
-            Random.Range(minX, maxX),
-            Random.Range(minY, maxY)
-        );
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
 
-        currentCoffee = Instantiate(coffeePrefab, randomPosition, Quaternion.identity);
+        Vector2 spawnPosition = Vector2.zero;
+        bool validPosition = false;
+
+        int attempts = 0;
+        float minimumDistanceFromPlayer = 7f; // 👈 bigger than bug distance
+
+        while (!validPosition && attempts < 30)
+        {
+            spawnPosition = new Vector2(
+                Random.Range(minX, maxX),
+                Random.Range(minY, maxY)
+            );
+
+            if (player == null)
+            {
+                validPosition = true;
+            }
+            else
+            {
+                float distance = Vector2.Distance(spawnPosition, player.transform.position);
+
+                if (distance >= minimumDistanceFromPlayer)
+                {
+                    validPosition = true;
+                }
+            }
+
+            attempts++;
+        }
+
+        if (!validPosition)
+            return;
+
+        currentCoffee = Instantiate(coffeePrefab, spawnPosition, Quaternion.identity);
+
         Destroy(currentCoffee, coffeeLifetime);
     }
 
