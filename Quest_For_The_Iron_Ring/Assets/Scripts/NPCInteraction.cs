@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class NPCInteraction : MonoBehaviour
@@ -8,12 +9,18 @@ public class NPCInteraction : MonoBehaviour
     [SerializeField] private GameObject dialogueBox;
     [SerializeField] private TMP_Text dialogueText;
     [SerializeField] private GameObject talkPrompt;
-    [SerializeField] private string message = "TA: Welcome to Amit Chakma Engineering Building. Are you ready for your first challenge?";
+
+    [SerializeField] private string message = "TA: Welcome to Amit Chakma Engineering Building. Are you ready for your first challenge?\n\nPress Y for Yes or N for No.";
     [SerializeField] private float typingSpeed = 0.04f;
+
+    [Header("Scene To Load")]
+    [SerializeField] private string classroomSceneName = "L1_Clasroom";
 
     private bool playerInRange = false;
     private bool isDialogueOpen = false;
     private bool isTyping = false;
+    private bool waitingForChoice = false;
+
     private Coroutine typingCoroutine;
 
     private void Start()
@@ -30,13 +37,21 @@ public class NPCInteraction : MonoBehaviour
 
     private void Update()
     {
-        if (playerInRange && Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame)
+        if (Keyboard.current == null) return;
+
+        if (playerInRange && Keyboard.current.eKey.wasPressedThisFrame && !isDialogueOpen)
         {
-            if (!isDialogueOpen)
+            OpenDialogue();
+            return;
+        }
+
+        if (isDialogueOpen && !isTyping && waitingForChoice)
+        {
+            if (Keyboard.current.yKey.wasPressedThisFrame)
             {
-                OpenDialogue();
+                StartLevel();
             }
-            else
+            else if (Keyboard.current.nKey.wasPressedThisFrame)
             {
                 CloseDialogue();
             }
@@ -50,6 +65,7 @@ public class NPCInteraction : MonoBehaviour
 
         dialogueBox.SetActive(true);
         isDialogueOpen = true;
+        waitingForChoice = false;
 
         if (talkPrompt != null)
             talkPrompt.SetActive(false);
@@ -67,6 +83,7 @@ public class NPCInteraction : MonoBehaviour
 
         isTyping = false;
         isDialogueOpen = false;
+        waitingForChoice = false;
 
         if (dialogueBox != null)
             dialogueBox.SetActive(false);
@@ -81,6 +98,7 @@ public class NPCInteraction : MonoBehaviour
     private IEnumerator TypeText()
     {
         isTyping = true;
+        waitingForChoice = false;
         dialogueText.text = "";
 
         foreach (char letter in message)
@@ -90,6 +108,13 @@ public class NPCInteraction : MonoBehaviour
         }
 
         isTyping = false;
+        waitingForChoice = true;
+    }
+
+    private void StartLevel()
+    {
+        Debug.Log("Player chose YES. Loading scene: " + classroomSceneName);
+        SceneManager.LoadScene(classroomSceneName);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -114,6 +139,7 @@ public class NPCInteraction : MonoBehaviour
 
             isTyping = false;
             isDialogueOpen = false;
+            waitingForChoice = false;
 
             if (dialogueBox != null)
                 dialogueBox.SetActive(false);

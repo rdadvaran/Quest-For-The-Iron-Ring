@@ -6,14 +6,8 @@ public class L1ClassroomPieceSpawner : MonoBehaviour
     public GameObject puzzlePiecePrefab;
     public Transform spawnAreaParent;
 
-    [Header("Difficulty Piece Counts")]
-    public int idleSlackerPieces = 4;
-    public int averageJoePieces = 6;
-    public int goodie2ShoesPieces = 8;
-    public int perfectionistPieces = 10;
-
     [HideInInspector]
-    public int numberOfPiecesToSpawn = 6;
+    public int numberOfPiecesToSpawn = 9;
 
     private List<L1ClassroomSpawnArea> spawnAreas = new List<L1ClassroomSpawnArea>();
 
@@ -35,37 +29,40 @@ public class L1ClassroomPieceSpawner : MonoBehaviour
 
     private void SetPieceCountFromDifficulty()
     {
-        numberOfPiecesToSpawn = averageJoePieces;
+        int difficultyValue = 3; // default = Average Joe
 
         if (GameSession.Instance != null)
         {
-            string difficulty = GameSession.Instance.selectedDifficulty;
-            Debug.Log("Selected difficulty in classroom: " + difficulty);
+            string selectedDifficulty = GameSession.Instance.selectedDifficulty;
+            Debug.Log("Selected difficulty in classroom: " + selectedDifficulty);
 
-            switch (difficulty)
+            switch (selectedDifficulty)
             {
                 case "Idle Slacker":
-                    numberOfPiecesToSpawn = idleSlackerPieces;
+                    difficultyValue = 2;
                     break;
 
                 case "Average Joe":
-                    numberOfPiecesToSpawn = averageJoePieces;
+                    difficultyValue = 3;
                     break;
 
                 case "Goodie 2 Shoes":
-                    numberOfPiecesToSpawn = goodie2ShoesPieces;
+                    difficultyValue = 3;
                     break;
 
                 case "Perfectionist":
-                    numberOfPiecesToSpawn = perfectionistPieces;
+                    difficultyValue = 4;
                     break;
 
                 default:
-                    numberOfPiecesToSpawn = averageJoePieces;
+                    difficultyValue = 3;
                     break;
             }
         }
 
+        numberOfPiecesToSpawn = difficultyValue * difficultyValue;
+
+        Debug.Log("Classroom difficulty value: " + difficultyValue);
         Debug.Log("Number of classroom pieces to spawn: " + numberOfPiecesToSpawn);
     }
 
@@ -76,6 +73,7 @@ public class L1ClassroomPieceSpawner : MonoBehaviour
         if (numberOfPiecesToSpawn > availableAreas.Count)
         {
             numberOfPiecesToSpawn = availableAreas.Count;
+            Debug.LogWarning("Not enough spawn areas. Reduced piece count to: " + numberOfPiecesToSpawn);
         }
 
         for (int i = 0; i < numberOfPiecesToSpawn; i++)
@@ -84,7 +82,6 @@ public class L1ClassroomPieceSpawner : MonoBehaviour
             L1ClassroomSpawnArea chosenArea = availableAreas[randomIndex];
 
             Vector2 spawnPosition = chosenArea.GetRandomPosition();
-
             Instantiate(puzzlePiecePrefab, spawnPosition, Quaternion.identity);
 
             availableAreas.RemoveAt(randomIndex);

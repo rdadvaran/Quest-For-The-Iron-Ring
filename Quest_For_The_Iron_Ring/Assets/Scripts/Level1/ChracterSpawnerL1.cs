@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class LevelCharacterSpawner : MonoBehaviour
+public class CharacterSpawnerL1 : MonoBehaviour
 {
     public GameObject basicPrefab;
     public GameObject aiPrefab;
@@ -52,7 +52,7 @@ public class LevelCharacterSpawner : MonoBehaviour
             }
         }
 
-        Instantiate(prefabToSpawn, spawnPoint.position, Quaternion.identity);
+        GameObject spawnedPlayer = Instantiate(prefabToSpawn, spawnPoint.position, Quaternion.identity);
+        spawnedPlayer.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
     }
 }
-    
