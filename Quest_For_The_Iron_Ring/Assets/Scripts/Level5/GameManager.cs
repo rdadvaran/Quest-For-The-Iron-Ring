@@ -4,12 +4,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    public string selectedCharacter = "Default";
+    public string selectedCharacter = "Player";
     public string selectedDifficulty = "AverageJoe";
 
     public bool isLevel5Completed = false;
-
-    private MainMenuActions menu;
 
     void Awake()
     {
@@ -18,22 +16,16 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        menu = FindObjectOfType<MainMenuActions>();
-
-        if (menu != null)
+        if (GameSession.Instance != null)
         {
-            selectedCharacter = menu.selectedCharacter;
-            selectedDifficulty = menu.selectedDifficulty;
-        }
-        else
-        {
-            Debug.LogWarning("MainMenuActions not found!");
+            selectedCharacter = GameSession.Instance.selectedCharacter;
+            selectedDifficulty = GameSession.Instance.selectedDifficulty;
         }
     }
 
     public int GetPlayerMaxHP()
     {
-        if (selectedCharacter == "Gym Rat" || selectedCharacter == "AI")
+        if (selectedCharacter == "GymRat_Player" || selectedCharacter == "AI_Player")
             return 5;
 
         return 3;
@@ -41,12 +33,12 @@ public class GameManager : MonoBehaviour
 
     public bool HasDoubleJump()
     {
-        return selectedCharacter == "Gym Rat" || selectedCharacter == "AI";
+        return selectedCharacter == "GymRat_Player" || selectedCharacter == "AI_Player";
     }
 
     public float GetCarryTime()
     {
-        if (selectedCharacter == "Gym Rat" || selectedCharacter == "AI")
+        if (selectedCharacter == "GymRat_Player" || selectedCharacter == "AI_Player")
             return 8f;
 
         return 5f;
@@ -56,11 +48,11 @@ public class GameManager : MonoBehaviour
     {
         switch (selectedDifficulty)
         {
-            case "Idle Slacker":
+            case "IdleSlacker":
                 return 50;
-            case "Average Joe":
+            case "AverageJoe":
                 return 70;
-            case "Goody 2 Shoes":
+            case "Goody2Shoes":
                 return 85;
             case "Perfectionist":
                 return 100;
