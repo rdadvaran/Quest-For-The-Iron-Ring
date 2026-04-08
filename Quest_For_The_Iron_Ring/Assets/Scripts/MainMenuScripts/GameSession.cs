@@ -4,7 +4,7 @@ public class GameSession : MonoBehaviour
 {
     public static GameSession Instance;
 
-    public string selectedCharacter = "Basic";
+    public string selectedCharacter = "Player";
     public string selectedDifficulty = "Average Joe";
 
     private void Awake()
