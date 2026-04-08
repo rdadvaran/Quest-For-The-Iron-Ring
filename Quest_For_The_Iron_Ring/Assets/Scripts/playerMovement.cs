@@ -34,7 +34,7 @@ public class playerMovement : MonoBehaviour
             animator.SetFloat("InputX", moveInput.x);
             animator.SetFloat("InputY", moveInput.y);
 
-            if (context.canceled)
+            if (isMoving)
             {
                 animator.SetFloat("LastInputX", moveInput.x);
                 animator.SetFloat("LastInputY", moveInput.y);
