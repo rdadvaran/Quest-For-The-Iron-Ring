@@ -6,15 +6,18 @@ using TMPro;
 
 public class NPCInteraction : MonoBehaviour
 {
+    [Header("UI References")]
     [SerializeField] private GameObject dialogueBox;
     [SerializeField] private TMP_Text dialogueText;
     [SerializeField] private GameObject talkPrompt;
 
-    [SerializeField] private string message = "TA: Welcome to Amit Chakma Engineering Building. Are you ready for your first challenge?\n\nPress Y for Yes or N for No.";
+    [Header("Dialogue Settings")]
+    [TextArea(3, 6)]
+    [SerializeField] private string message = "TA: Welcome! Are you ready for your first challenge?\n\nPress Y for Yes or N for No.";
     [SerializeField] private float typingSpeed = 0.04f;
 
     [Header("Scene To Load")]
-    [SerializeField] private string classroomSceneName = "L1_Clasroom";
+    [SerializeField] private string sceneToLoad = "L1_Classroom";
 
     private bool playerInRange = false;
     private bool isDialogueOpen = false;
@@ -39,12 +42,14 @@ public class NPCInteraction : MonoBehaviour
     {
         if (Keyboard.current == null) return;
 
+        // Press E to open dialogue when near the NPC
         if (playerInRange && Keyboard.current.eKey.wasPressedThisFrame && !isDialogueOpen)
         {
             OpenDialogue();
             return;
         }
 
+        // After dialogue finishes typing, allow Y/N choice
         if (isDialogueOpen && !isTyping && waitingForChoice)
         {
             if (Keyboard.current.yKey.wasPressedThisFrame)
@@ -101,6 +106,7 @@ public class NPCInteraction : MonoBehaviour
         waitingForChoice = false;
         dialogueText.text = "";
 
+        // Type the message one letter at a time
         foreach (char letter in message)
         {
             dialogueText.text += letter;
@@ -113,8 +119,13 @@ public class NPCInteraction : MonoBehaviour
 
     private void StartLevel()
     {
-        Debug.Log("Player chose YES. Loading scene: " + classroomSceneName);
-        SceneManager.LoadScene(classroomSceneName);
+        if (string.IsNullOrWhiteSpace(sceneToLoad))
+        {
+            Debug.LogWarning("Scene name is empty on " + gameObject.name);
+            return;
+        }
+
+        SceneManager.LoadScene(sceneToLoad);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -133,19 +144,7 @@ public class NPCInteraction : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
-
-            if (typingCoroutine != null)
-                StopCoroutine(typingCoroutine);
-
-            isTyping = false;
-            isDialogueOpen = false;
-            waitingForChoice = false;
-
-            if (dialogueBox != null)
-                dialogueBox.SetActive(false);
-
-            if (dialogueText != null)
-                dialogueText.text = "";
+            CloseDialogue();
 
             if (talkPrompt != null)
                 talkPrompt.SetActive(false);
