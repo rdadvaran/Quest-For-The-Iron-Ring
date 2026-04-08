@@ -15,6 +15,7 @@ public class Bug : MonoBehaviour
     [SerializeField] private Sprite[] bugUpFrames;
 
     [SerializeField] private float animationSpeed = 0.15f;
+    [SerializeField] private GameObject killPrompt;
 
     private Vector2 direction;
     private Rigidbody2D rb;
@@ -169,5 +170,16 @@ public class Bug : MonoBehaviour
 
             Destroy(gameObject);
         }
+    }
+    public void ShowKillPrompt()
+    {
+        if (killPrompt != null)
+            killPrompt.SetActive(true);
+    }
+
+    public void HideKillPrompt()
+    {
+        if (killPrompt != null)
+            killPrompt.SetActive(false);
     }
 }

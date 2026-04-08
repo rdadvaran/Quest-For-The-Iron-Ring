@@ -17,6 +17,7 @@ public class BugRange : MonoBehaviour
             if (player != null && parentBug != null)
             {
                 player.SetNearbyBug(parentBug);
+                parentBug.ShowKillPrompt();
             }
         }
     }
@@ -26,9 +27,10 @@ public class BugRange : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             playerMovement player = collision.GetComponent<playerMovement>();
-            if (player != null)
+            if (player != null && parentBug != null)
             {
                 player.ClearNearbyBug(parentBug);
+                parentBug.HideKillPrompt();
             }
         }
     }
