@@ -54,12 +54,89 @@ public class GlobalGameManager : MonoBehaviour
         timerRunning = false;
     }
 
+    // Grade percentage based on selected difficulty and completion time
+    public float GetGradePercentage()
+    {
+        float timeFor100 = 75f;
+        float timeFor85 = 100f;
+        float timeFor70 = 130f;
+
+        if (GameSession.Instance != null)
+        {
+            switch (GameSession.Instance.selectedDifficulty)
+            {
+                case "Idle Slacker":
+                    timeFor100 = 45f;
+                    timeFor85 = 60f;
+                    timeFor70 = 75f;
+                    break;
+
+                case "Average Joe":
+                    timeFor100 = 40f;
+                    timeFor85 = 55f;
+                    timeFor70 = 70f;
+                    break;
+
+                case "Goodie 2 Shoes":
+                    timeFor100 = 35f;
+                    timeFor85 = 50f;
+                    timeFor70 = 65f;
+                    break;
+
+                case "Perfectionist":
+                    timeFor100 = 25f;
+                    timeFor85 = 40f;
+                    timeFor70 = 55f;
+                    break;
+
+                default:
+                    timeFor100 = 80f;
+                    timeFor85 = 105f;
+                    timeFor70 = 135f;
+                    break;
+            }
+        }
+
+        if (totalTime <= timeFor100) return 100f;
+        if (totalTime <= timeFor85) return 85f;
+        if (totalTime <= timeFor70) return 70f;
+        return 50f;
+    }
+
+    // Required passing grade based on selected difficulty
+    public float GetPassingPercentage()
+    {
+        if (GameSession.Instance != null)
+        {
+            switch (GameSession.Instance.selectedDifficulty)
+            {
+                case "Idle Slacker":
+                    return 50f;
+
+                case "Average Joe":
+                    return 70f;
+
+                case "Goodie 2 Shoes":
+                    return 85f;
+
+                case "Perfectionist":
+                    return 100f;
+
+                default:
+                    return 70f;
+            }
+        }
+
+        return 70f;
+    }
+
+    public bool DidPlayerPass()
+    {
+        return GetGradePercentage() >= GetPassingPercentage();
+    }
+
     public string CalculateGrade()
     {
-        if (totalTime < 90f) return "A";
-        if (totalTime < 120f) return "B";
-        if (totalTime < 150f) return "C";
-        if (totalTime < 180f) return "D";
-        return "F";
+        return GetGradePercentage().ToString("0") + "%";
     }
 }
