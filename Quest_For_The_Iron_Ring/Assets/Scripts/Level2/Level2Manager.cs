@@ -38,7 +38,8 @@ public class Level2Manager : MonoBehaviour
         markManager.Setup(tasks.Count);
         GlobalGameManager.Instance.ResetGameData();
 
-        float baseTime = 120f;
+        isHackerPlayer = GameSession.Instance != null && GameSession.Instance.selectedCharacter == "Hacker_Player";
+        float baseTime = deadlineManager.GetTimeBasedOnDifficulty();
         if (isHackerPlayer)
         {
             baseTime += baseTime * bonusTimePercent;

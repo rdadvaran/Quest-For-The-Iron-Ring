@@ -1,5 +1,5 @@
+﻿using TMPro;
 using UnityEngine;
-using TMPro;
 
 public class DeadlineManager : MonoBehaviour
 {
@@ -9,8 +9,22 @@ public class DeadlineManager : MonoBehaviour
 
     private bool timerRunning = false;
 
+    // 🔹 Difficulty-based time settings
+    public float idleSlackerTime = 180f;      
+    public float averageJoeTime = 120f;       
+    public float goody2ShoesTime = 90f;      
+    public float perfectionistTime = 60f;  
+
+    public void StartTimer()
+    {
+        timeRemaining = GetTimeBasedOnDifficulty();
+        timerRunning = true;
+        UpdateTimerUI();
+    }
+
     public void StartTimer(float startTime)
     {
+        // Optional override 
         timeRemaining = startTime;
         timerRunning = true;
         UpdateTimerUI();
@@ -40,6 +54,36 @@ public class DeadlineManager : MonoBehaviour
     public bool IsTimeUp()
     {
         return timeRemaining <= 0;
+    }
+
+    public float GetTimeBasedOnDifficulty()
+    {
+        if (GameSession.Instance == null)
+        {
+            Debug.LogWarning("GameSession not found. Using default time.");
+            return averageJoeTime;
+        }
+
+        string difficulty = GameSession.Instance.selectedDifficulty;
+
+        switch (difficulty)
+        {
+            case "Idle Slacker":
+                return idleSlackerTime;
+
+            case "Average Joe":
+                return averageJoeTime;
+
+            case "Goody 2 Shoes":
+                return goody2ShoesTime;
+
+            case "Perfectionist":
+                return perfectionistTime;
+
+            default:
+                Debug.LogWarning("Unknown difficulty: " + difficulty);
+                return averageJoeTime;
+        }
     }
 
     void UpdateTimerUI()

@@ -290,8 +290,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -111.96463, y: 163}
-  m_SizeDelta: {x: 423.9292, y: 50}
+  m_AnchoredPosition: {x: -111.96, y: 50.523407}
+  m_SizeDelta: {x: 423.9292, y: 63.0468}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &180295827
 MonoBehaviour:
@@ -1099,7 +1099,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0000071526, y: -0.000013351}
+  m_AnchoredPosition: {x: 0.0000071526, y: -82.4}
   m_SizeDelta: {x: 359.5267, y: 71.6278}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &635666314
@@ -1472,7 +1472,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 96.22536}
+  m_AnchoredPosition: {x: 0, y: -13.6}
   m_SizeDelta: {x: 200, y: 84.4507}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &882785975
@@ -1849,7 +1849,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -201.94, y: -116}
+  m_AnchoredPosition: {x: -201.94, y: -167}
   m_SizeDelta: {x: 243.9869, y: 64.857}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1069906006
@@ -2031,7 +2031,7 @@ MonoBehaviour:
   resultPanel: {fileID: 1336857933}
   resultTitleText: {fileID: 481468951}
   finalScoreText: {fileID: 1653742634}
-  isHackerPlayer: 1
+  isHackerPlayer: 0
   bonusTimePercent: 0.2
   freeHints: 2
 --- !u!1 &1185187792
@@ -2191,7 +2191,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 204.8063, y: -116}
+  m_AnchoredPosition: {x: 204.8063, y: -172.9}
   m_SizeDelta: {x: 209.6126, y: 64.853}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1286725026
@@ -2322,8 +2322,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0000076294, y: 249}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 22.1012, y: 91.272}
+  m_SizeDelta: {x: 204.095, y: 44.543}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1298625477
 MonoBehaviour:
@@ -2372,8 +2372,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32
-  m_fontSizeBase: 32
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2411,7 +2411,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: 51.74694, w: 19.068369}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -3163,6 +3163,10 @@ MonoBehaviour:
   timeRemaining: 120
   hasDeadline: 1
   timerText: {fileID: 142212836}
+  idleSlackerTime: 180
+  averageJoeTime: 120
+  goody2ShoesTime: 90
+  perfectionistTime: 60
 --- !u!4 &1997535370
 Transform:
   m_ObjectHideFlags: 0
