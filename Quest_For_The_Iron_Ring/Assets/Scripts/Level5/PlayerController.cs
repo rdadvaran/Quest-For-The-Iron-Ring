@@ -26,6 +26,10 @@ public class PlayerController : MonoBehaviour
 
     private int hp = 3;
 
+    private Enemy carriedEnemy = null;
+    private float carryTimer = 0f;
+    private float carryDuration = 5f;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -52,6 +56,7 @@ public class PlayerController : MonoBehaviour
         Move();
         Jump();
         Shoot();
+        HandleCarry();
     }
 
     void Move()
@@ -114,12 +119,87 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void HandleCarry()
+    {
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            if (carriedEnemy == null)
+            {
+                TryPickUp();
+            }
+            else
+            {
+                DropEnemy();
+            }
+        }
+
+        if (carriedEnemy != null)
+        {
+            carryTimer -= Time.deltaTime;
+
+            Vector3 offset = new Vector3(0.8f * facingDirection, 0f, 0f);
+            carriedEnemy.transform.position = transform.position + offset;
+
+            if (carryTimer <= 0f)
+            {
+                DropEnemy();
+            }
+        }
+    }
+
+    void TryPickUp()
+    {
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 1f);
+
+        foreach (Collider2D hit in hits)
+        {
+            Enemy e = hit.GetComponent<Enemy>();
+            if (e != null && e.IsKnockedOut())
+            {
+                carriedEnemy = e;
+                carryTimer = carryDuration;
+
+                Collider2D enemyCol = e.GetComponent<Collider2D>();
+                if (enemyCol != null)
+                {
+                    enemyCol.enabled = false;
+                }
+
+                return;
+            }
+        }
+    }
+
+    void DropEnemy()
+    {
+        if (carriedEnemy != null)
+        {
+            Collider2D enemyCol = carriedEnemy.GetComponent<Collider2D>();
+            if (enemyCol != null)
+            {
+                enemyCol.enabled = true;
+            }
+        }
+
+        carriedEnemy = null;
+    }
+
     public void TakeDamage(int dmg)
     {
         hp -= dmg;
-
+        
+        if (UIManager.Instance != null)
+        {
+            UIManager.Instance.UpdateBurnout(hp);
+        }
+        
         if (hp <= 0)
         {
+            if (UIManager.Instance != null)
+            {
+                UIManager.Instance.PlayerDied();
+            }
+            
             Destroy(gameObject);
         }
     }

@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public string selectedCharacter = "Player";
     public string selectedDifficulty = "AverageJoe";
 
+    public int enemiesPushed = 0;
     public int enemiesMissed = 0;
 
     public bool isLevel5Completed = false;
