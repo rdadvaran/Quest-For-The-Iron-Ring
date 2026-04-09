@@ -9,10 +9,20 @@ public class playerMovement : MonoBehaviour
     private Vector2 moveInput;
     private Animator animator;
 
+    private Bug nearbyBug;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+    }
+
+    void Update()
+    {
+        if (nearbyBug != null && Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            nearbyBug.TakeDamage(1);
+        }
     }
 
     void FixedUpdate()
@@ -39,6 +49,19 @@ public class playerMovement : MonoBehaviour
                 animator.SetFloat("LastInputX", moveInput.x);
                 animator.SetFloat("LastInputY", moveInput.y);
             }
+        }
+    }
+
+    public void SetNearbyBug(Bug bug)
+    {
+        nearbyBug = bug;
+    }
+
+    public void ClearNearbyBug(Bug bug)
+    {
+        if (nearbyBug == bug)
+        {
+            nearbyBug = null;
         }
     }
 }
