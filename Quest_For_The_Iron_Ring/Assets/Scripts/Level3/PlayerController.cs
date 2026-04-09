@@ -6,18 +6,31 @@ public class PlayerController : MonoBehaviour
 
     private int currentHealth;
     private Task3 levelManager;
+    private bool initialized = false;
 
     public int CurrentHealth => currentHealth;
 
     private void Start()
     {
-        currentHealth = maxHealth;
-        levelManager = FindObjectOfType<Task3>();
+        Initialize();
     }
 
-    // Damage or heal the player
+    private void Initialize()
+    {
+        if (initialized) return;
+
+        currentHealth = maxHealth;
+        levelManager = FindObjectOfType<Task3>();
+        initialized = true;
+    }
+
     public void UpdateHealth(int amount)
     {
+        if (!initialized)
+        {
+            Initialize();
+        }
+
         currentHealth += amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
@@ -36,7 +49,11 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Pick up a logo
+        if (!initialized)
+        {
+            Initialize();
+        }
+
         IconBehavior icon = other.GetComponent<IconBehavior>();
         if (icon != null)
         {

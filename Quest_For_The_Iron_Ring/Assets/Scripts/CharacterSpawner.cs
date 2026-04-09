@@ -52,7 +52,10 @@ public class LevelCharacterSpawner : MonoBehaviour
             }
         }
 
-        Instantiate(prefabToSpawn, spawnPoint.position, Quaternion.identity);
+        GameObject spawnedPlayer = Instantiate(prefabToSpawn, spawnPoint.position, Quaternion.identity);
+
+        // Tag the spawned player so other scripts can find it
+        spawnedPlayer.tag = "Player";
     }
 }
     

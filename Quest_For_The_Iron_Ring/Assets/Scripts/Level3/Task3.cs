@@ -15,7 +15,6 @@ public class Task3 : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private ProjectileSpawner projectileSpawner;
-    [SerializeField] private PlayerController player;
 
     [Header("Optional UI")]
     [SerializeField] private TMP_Text timerText;
@@ -29,11 +28,16 @@ public class Task3 : MonoBehaviour
     private int currentPhase = 1;
     private int iconsCollected = 0;
 
+    private PlayerController player;
+
     public int Phase => currentPhase;
 
     private void Start()
     {
         currentTime = levelTime;
+
+        // Try to find the spawned player when level starts
+        FindPlayer();
 
         if (projectileSpawner != null)
         {
@@ -47,6 +51,12 @@ public class Task3 : MonoBehaviour
     {
         if (levelEnded) return;
 
+        // If player was not found yet, keep trying
+        if (player == null)
+        {
+            FindPlayer();
+        }
+
         currentTime -= Time.deltaTime;
         if (currentTime < 0f) currentTime = 0f;
 
@@ -59,19 +69,25 @@ public class Task3 : MonoBehaviour
         }
     }
 
+    private void FindPlayer()
+    {
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        if (playerObject != null)
+        {
+            player = playerObject.GetComponent<PlayerController>();
+        }
+    }
+
+
     public void UpdatePhase()
     {
         float elapsed = levelTime - currentTime;
         int newPhase = 1;
 
         if (elapsed >= phase3StartTime)
-        {
             newPhase = 3;
-        }
         else if (elapsed >= phase2StartTime)
-        {
             newPhase = 2;
-        }
 
         if (newPhase != currentPhase)
         {
@@ -81,8 +97,6 @@ public class Task3 : MonoBehaviour
             {
                 projectileSpawner.UpdateSpawnTable(currentPhase);
             }
-
-            Debug.Log("Phase changed to: " + currentPhase);
         }
     }
 
@@ -123,8 +137,6 @@ public class Task3 : MonoBehaviour
         {
             resultText.text = "You Survived!\nGrade: " + grade;
         }
-
-        Debug.Log("Final Grade: " + grade);
 
         Invoke(nameof(ReturnToHub), 3f);
     }

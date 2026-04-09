@@ -41,4 +41,10 @@ public class playerMovement : MonoBehaviour
             }
         }
     }
+
+    // Lets another script change movement speed at runtime
+    public void SetMoveSpeed(float newSpeed)
+    {
+        moveSpeed = newSpeed;
+    }
 }
