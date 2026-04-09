@@ -22,7 +22,6 @@ public class playerMovement : MonoBehaviour
         if (nearbyBug != null && Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame)
         {
             nearbyBug.TakeDamage(1);
-            nearbyBug = null;
         }
     }
 

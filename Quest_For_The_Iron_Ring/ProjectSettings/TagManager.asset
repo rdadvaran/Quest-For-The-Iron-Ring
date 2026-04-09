@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Bug
   - Wall
+  - BigBug
   layers:
   - Default
   - TransparentFX

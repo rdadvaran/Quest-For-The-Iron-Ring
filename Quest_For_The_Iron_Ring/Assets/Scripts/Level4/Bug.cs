@@ -17,7 +17,7 @@ public class Bug : MonoBehaviour
     [SerializeField] private float animationSpeed = 0.15f;
     [SerializeField] private GameObject killPrompt;
 
-    private Vector2 direction;
+    protected Vector2 direction;
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
 
@@ -49,15 +49,27 @@ public class Bug : MonoBehaviour
         ForceSetFirstFrame();
     }
 
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
+        direction = GetMovementDirection();
+
         if (rb != null)
         {
-            rb.linearVelocity = direction * speed;
+            rb.linearVelocity = direction * GetMoveSpeed();
         }
-    
+
         UpdateFacingDirection();
         UpdateBugAnimation();
+    }
+
+    protected virtual Vector2 GetMovementDirection()
+    {
+        return direction;
+    }
+
+    protected virtual float GetMoveSpeed()
+    {
+        return speed;
     }
 
     private void UpdateFacingDirection()
@@ -171,6 +183,7 @@ public class Bug : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
     public void ShowKillPrompt()
     {
         if (killPrompt != null)
