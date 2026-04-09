@@ -734,6 +734,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1492303238}
+  - component: {fileID: 1492303239}
   m_Layer: 0
   m_Name: ProjectileSpawner
   m_TagString: Untagged
@@ -756,6 +757,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1492303239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492303237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab5b812cf9ab3fb4fa35c70a21464a6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectileSpawner
+  cubePrefab: {fileID: 0}
+  cylinderPrefab: {fileID: 0}
+  spherePrefab: {fileID: 0}
+  warningPrefab: {fileID: 0}
+  minX: -5.6
+  maxX: 5.6
+  minY: -4
+  maxY: 4
+  warningTime: 1
+  phase2SpawnRate: 2.5
+  phase3SpawnRate: 2
 --- !u!1 &1511074501
 GameObject:
   m_ObjectHideFlags: 0
@@ -765,6 +789,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1511074502}
+  - component: {fileID: 1511074504}
+  - component: {fileID: 1511074503}
   m_Layer: 0
   m_Name: Task3Manager
   m_TagString: Untagged
@@ -787,6 +813,43 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1511074503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511074501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe9d76765d8a771468647309dc9d8bc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Level3PlayerSetup
+  normalSpeed: 5
+  boostedSpeed: 6.5
+--- !u!114 &1511074504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511074501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8644fe38f4c4004e8c45910d48e0369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Task3
+  levelTime: 180
+  hubSceneName: Hub
+  maxIconsForGrade: 20
+  phase2StartTime: 60
+  phase3StartTime: 120
+  projectileSpawner: {fileID: 0}
+  timerText: {fileID: 0}
+  healthText: {fileID: 0}
+  iconText: {fileID: 0}
+  phaseText: {fileID: 0}
+  resultText: {fileID: 0}
 --- !u!1 &1623836867
 GameObject:
   m_ObjectHideFlags: 0
