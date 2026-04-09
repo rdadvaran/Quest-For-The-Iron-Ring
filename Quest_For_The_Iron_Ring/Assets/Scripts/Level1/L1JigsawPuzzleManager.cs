@@ -28,6 +28,8 @@ public class L1JigsawPuzzleManager : MonoBehaviour
 
     private void Start()
     {
+        SetDifficultyFromGameSession();
+
         if (GlobalGameManager.Instance != null)
         {
             GlobalGameManager.Instance.correctPlacements = 0;
@@ -44,6 +46,42 @@ public class L1JigsawPuzzleManager : MonoBehaviour
         {
             puzzleUIManager.UpdateCorrectUI();
         }
+    }
+
+    private void SetDifficultyFromGameSession()
+    {
+        difficulty = 3; // default
+
+        if (GameSession.Instance != null)
+        {
+            string selectedDifficulty = GameSession.Instance.selectedDifficulty;
+            Debug.Log("Jigsaw selected difficulty: " + selectedDifficulty);
+
+            switch (selectedDifficulty)
+            {
+                case "Idle Slacker":
+                    difficulty = 2;
+                    break;
+
+                case "Average Joe":
+                    difficulty = 3;
+                    break;
+
+                case "Goodie 2 Shoes":
+                    difficulty = 3;
+                    break;
+
+                case "Perfectionist":
+                    difficulty = 4;
+                    break;
+
+                default:
+                    difficulty = 3;
+                    break;
+            }
+        }
+
+        Debug.Log("Jigsaw puzzle difficulty value = " + difficulty);
     }
 
     private void Update()
@@ -200,7 +238,6 @@ public class L1JigsawPuzzleManager : MonoBehaviour
         {
             BoxCollider2D pieceCollider = draggingPiece.GetComponent<BoxCollider2D>();
 
-            // Only count the piece once
             if (pieceCollider != null && pieceCollider.enabled)
             {
                 draggingPiece.localPosition = targetPosition;
