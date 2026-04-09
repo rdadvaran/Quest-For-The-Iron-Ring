@@ -1,4 +1,4 @@
-using UnityEngine;
+Fusing UnityEngine;
 using UnityEngine.InputSystem;
 
 public class playerMovement : MonoBehaviour
@@ -9,10 +9,20 @@ public class playerMovement : MonoBehaviour
     private Vector2 moveInput;
     private Animator animator;
 
+    private Bug nearbyBug;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+    }
+
+    void Update()
+    {
+        if (nearbyBug != null && Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            nearbyBug.TakeDamage(1);
+        }
     }
 
     void FixedUpdate()
@@ -42,9 +52,16 @@ public class playerMovement : MonoBehaviour
         }
     }
 
-    // Lets another script change movement speed at runtime
-    public void SetMoveSpeed(float newSpeed)
+    public void SetNearbyBug(Bug bug)
     {
-        moveSpeed = newSpeed;
+        nearbyBug = bug;
+    }
+
+    public void ClearNearbyBug(Bug bug)
+    {
+        if (nearbyBug == bug)
+        {
+            nearbyBug = null;
+        }
     }
 }
