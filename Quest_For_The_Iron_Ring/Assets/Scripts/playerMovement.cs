@@ -1,4 +1,4 @@
-Fusing UnityEngine;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class playerMovement : MonoBehaviour
@@ -50,6 +50,12 @@ public class playerMovement : MonoBehaviour
                 animator.SetFloat("LastInputY", moveInput.y);
             }
         }
+    }
+
+    // for level 3
+    public void SetMoveSpeed(float newSpeed)
+    {
+        moveSpeed = newSpeed;
     }
 
     public void SetNearbyBug(Bug bug)

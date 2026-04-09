@@ -48,7 +48,7 @@ public class ProjectileSpawner : MonoBehaviour
         if (!cubeSpawned && cubePrefab != null)
         {
             Vector3 cubePos = new Vector3(0f, 3f, 0f);
-            StartCoroutine(SpawnWithWarning(cubePrefab, cubePos, Quaternion.identity, null, false));
+            StartCoroutine(SpawnWithWarning(cubePrefab, cubePos, Quaternion.identity, Vector2.zero, false));
             cubeSpawned = true;
         }
     }
