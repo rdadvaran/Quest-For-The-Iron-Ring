@@ -82,21 +82,24 @@ public class GameManager : MonoBehaviour
     }
 
     public void AddBurnout(int amount)
+{
+    if (gameEnded) return;
+
+    burnoutLevel += amount;
+
+    if (burnoutLevel >= maxBurnout)
     {
-        if (gameEnded) return;
+        burnoutLevel = maxBurnout;
+        gameEnded = true;
 
-        burnoutLevel += amount;
-
-        if (burnoutLevel > maxBurnout)
-            burnoutLevel = maxBurnout;
-
-        if (burnoutLevel >= maxBurnout)
+        if (LevelEndManager.Instance != null)
         {
-            EndGame("Max burnout reached!");
+            LevelEndManager.Instance.TriggerGameOver();
         }
-
-        UpdateUI();
     }
+
+    UpdateUI();
+}
 
     public void ReduceBurnout(int amount)
     {
