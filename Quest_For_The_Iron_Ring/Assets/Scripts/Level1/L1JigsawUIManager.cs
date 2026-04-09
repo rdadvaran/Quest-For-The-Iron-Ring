@@ -108,14 +108,13 @@ public class L1JigsawUIManager : MonoBehaviour
             finalTimeText.text = "Final Time: " + minutes.ToString("00") + ":" + seconds.ToString("00");
         }
 
-        // Show final grade, required grade, result, and return instruction
+        // Show final grade, required grade, and result
         if (gradeText != null)
         {
             gradeText.text =
                 "Final Grade: " + GlobalGameManager.Instance.finalGrade +
                 "\nRequired Grade: " + requiredGrade.ToString("0") + "%" +
-                "\nResult: " + (didPass ? "PASS" : "FAIL") +
-                "\n\nPress E to return";
+                "\nResult: " + (didPass ? "PASS" : "FAIL");
         }
 
         // Open the finish panel

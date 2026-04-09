@@ -6,11 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="abfa54dc-0714-4337-9e79-8de0236818d9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Quest_For_The_Iron_Ring/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Quest_For_The_Iron_Ring/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Hallway_Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Hallway_Scene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Level1/L1_JigsawPuzzle.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Level1/L1_JigsawPuzzle.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Level1/GlobalGameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Level1/GlobalGameManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Level1/L1JigsawUIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Level1/L1JigsawUIManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Bangers SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Bangers SDF.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +42,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Level1",
     "junie.onboarding.icon.badge.shown": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -110,6 +106,7 @@
       <workItem from="1775595810344" duration="3000" />
       <workItem from="1775595960412" duration="441000" />
       <workItem from="1775658946805" duration="32000" />
+      <workItem from="1775698760790" duration="842000" />
     </task>
     <servers />
   </component>
