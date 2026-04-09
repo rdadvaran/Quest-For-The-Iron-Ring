@@ -7,6 +7,7 @@ public class Level5Generator : MonoBehaviour
     public GameObject[] characterPrefabs;
     public GameObject enemyPrefab;
     public GameObject doorPrefab;
+    public GameObject playerBulletPrefab;
 
     public Transform platformSpawnParent;
 
@@ -42,29 +43,64 @@ public class Level5Generator : MonoBehaviour
     void SpawnPlayer()
     {
         int index = Random.Range(0, availablePlatforms.Count);
-
+        
         GameObject platform = availablePlatforms[index];
-        Vector3 spawnPos = platform.transform.position + new Vector3(0, 1.5f, 0);
-
+        
+        Vector3 spawnPos = platform.transform.position + new Vector3(0, 2f, 0);
+        
         GameObject selectedPrefab = characterPrefabs[0];
-
+        
         if (GameManager.Instance != null)
         {
             string character = GameManager.Instance.selectedCharacter;
-
             foreach (GameObject prefab in characterPrefabs)
             {
-                if (prefab.name == character)
+                if (prefab.name.Trim() == character.Trim())
                 {
                     selectedPrefab = prefab;
                     break;
                 }
             }
         }
-
+        
         GameObject player = Instantiate(selectedPrefab, spawnPos, Quaternion.identity);
-        player.transform.localScale = enemyPrefab.transform.localScale * 1.25f;
-
+        
+        playerMovement oldMovement = player.GetComponent<playerMovement>();
+        if (oldMovement != null)
+        {
+            Destroy(oldMovement);
+        }
+        
+        UnityEngine.InputSystem.PlayerInput input = player.GetComponent<UnityEngine.InputSystem.PlayerInput>();
+        if(input != null)
+        {
+            input.enabled = false;
+        }
+        
+        Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
+        if (rb != null)
+        {
+            rb.gravityScale = 3f;
+        }
+        
+        PlayerController controller = player.AddComponent<PlayerController>();
+        
+        GameObject groundCheck = new GameObject("GroundCheck");
+        groundCheck.transform.parent = player.transform;
+        groundCheck.transform.localPosition = new Vector3(0, -0.6f, 0);
+        controller.groundCheck = groundCheck.transform;
+        
+        controller.groundLayer = Physics2D.AllLayers;
+        
+        GameObject firePoint = new GameObject("FirePoint");
+        firePoint.transform.parent = player.transform;
+        firePoint.transform.localPosition = new Vector3(0.5f, 0.2f, 0);
+        
+        controller.Initialize(playerBulletPrefab, firePoint.transform);
+        
+        player.tag = "Player";
+        player.transform.localScale = Vector3.one * 0.9f;
+        
         availablePlatforms.RemoveAt(index);
     }
 
@@ -77,7 +113,7 @@ public class Level5Generator : MonoBehaviour
         {
             GameObject platform = tempPlatforms[i];
 
-            Vector3 spawnPos = platform.transform.position + new Vector3(1.5f, 1.2f, 0);
+            Vector3 spawnPos = platform.transform.position + new Vector3(1.5f, 1.5f, 0);
 
             GameObject door = Instantiate(doorPrefab, spawnPos, Quaternion.identity);
 
@@ -110,6 +146,12 @@ public class Level5Generator : MonoBehaviour
             Vector3 spawnPos = platform.transform.position + new Vector3(offsetX, 1.5f, 0);
 
             GameObject enemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
+
+            Enemy enemyScript = enemy.GetComponent<Enemy>();
+            if (enemyScript != null)
+            {
+                enemyScript.SetPlatform(platform);
+            }
 
             spawnedEnemies.Add(enemy);
 
