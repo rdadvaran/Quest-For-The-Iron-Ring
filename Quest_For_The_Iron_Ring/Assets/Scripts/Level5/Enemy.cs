@@ -161,18 +161,11 @@ public class Enemy : MonoBehaviour
             
             if (collision.gameObject == assignedDoor)
             {
-                if (GameManager.Instance != null)
+                if(UIManager.Instance != null)
                 {
-                    GameManager.Instance.enemiesPushed++;
+                    UIManager.Instance.FileDestroyed(true);
                 }
-                
-                if (UIManager.Instance != null && GameManager.Instance != null)
-                {
-                    UIManager.Instance.UpdateFiles(
-                    GameManager.Instance.enemiesPushed,
-                    GameManager.Instance.enemiesMissed);
-                }
-                
+
                 Destroy(gameObject);
             }
             else

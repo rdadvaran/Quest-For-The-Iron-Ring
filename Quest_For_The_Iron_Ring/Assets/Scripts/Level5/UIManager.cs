@@ -11,9 +11,7 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI subText;
     public TextMeshProUGUI warningText;
 
-    private int totalEnemies = 4;
-    private int remainingEnemies = 4;
-
+    private int filesRemaining = 4;
     private bool levelEnded = false;
 
     void Awake()
@@ -24,8 +22,10 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         UpdateBurnout(3);
-        UpdateFiles(0, 0);
+        UpdateFiles();
         warningText.text = "";
+        centerText.text = "";
+        subText.text = "";
     }
 
     public void UpdateBurnout(int hp)
@@ -33,15 +33,35 @@ public class UIManager : MonoBehaviour
         burnoutText.text = "Burnout: " + hp;
     }
 
-    public void UpdateFiles(int pushed, int missed)
+    public void UpdateFiles()
     {
-        remainingEnemies = totalEnemies - (pushed + missed);
-        filesText.text = "Files remaining: " + remainingEnemies;
+        filesText.text = "Files Remaining: " + filesRemaining;
 
-        if (!levelEnded && remainingEnemies <= 0)
+        if (!levelEnded && filesRemaining <= 0)
         {
             EndLevel();
         }
+    }
+
+    public void FileDestroyed(bool pushed)
+    {
+        if (levelEnded) return;
+
+        if (pushed)
+        {
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.enemiesPushed++;
+            }
+        }
+
+        filesRemaining--;
+        if(filesRemaining < 0)
+        {
+            filesRemaining = 0;
+        }
+
+        UpdateFiles();
     }
 
     public void ShowWrongDoor(bool show)
@@ -75,16 +95,32 @@ public class UIManager : MonoBehaviour
 
         centerText.text = "Game Over";
 
-        int pushed = GameManager.Instance.enemiesPushed;
-        string difficulty = GameManager.Instance.selectedDifficulty;
+        int pushed = 0;
+        string difficulty = "";
+
+        if (GameManager.Instance != null)
+        {
+            pushed = GameManager.Instance.enemiesPushed;
+            difficulty = GameManager.Instance.selectedDifficulty;
+        }
 
         bool passed = false;
 
-        if (difficulty == "Idle Slacker" && pushed >= 2) passed = true;
-        if (difficulty == "Average Joe" && pushed >= 3) passed = true;
-        if (difficulty == "Goody 2 Shoes" && pushed >= 3) passed = true;
+        if ((difficulty == "Idle Slacker" || difficulty == "IdleSlacker") && pushed >= 2) passed = true;
+        if ((difficulty == "Average Joe" || difficulty == "AverageJoe") && pushed >= 3) passed = true;
+        if ((difficulty == "Goody 2 Shoes" || difficulty == "Goody2Shoes") && pushed >= 3) passed = true;
         if (difficulty == "Perfectionist" && pushed >= 4) passed = true;
 
+        if(GameManager.Instance != null)
+        {
+            GameManager.Instance.isLevel5Completed = passed;
+        }
+
+        subText.gameObject.SetActive(true);
         subText.text = passed ? "You passed" : "You failed";
+
+        Debug.Log("Difficulty = " + difficulty);
+        Debug.Log("Enemies Pushed = " + pushed);
+        Debug.Log("SubText = " + subText.text);
     }
 }

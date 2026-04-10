@@ -4,14 +4,25 @@ public class DeathZone : MonoBehaviour
 {
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Enemy"))
+        if(other.CompareTag("Player"))
         {
-            GameManager.Instance.enemiesMissed++;
-
             if (UIManager.Instance != null)
             {
-                UIManager.Instance.UpdateFiles(GameManager.Instance.enemiesPushed, GameManager.Instance.enemiesMissed);
+                UIManager.Instance.PlayerDied();
             }
+
+            Destroy(other.gameObject);
+        }
+
+        if (other.CompareTag("Enemy"))
+        {
+            if (UIManager.Instance != null)
+            {
+                UIManager.Instance.FileDestroyed(false);
+            }
+
+            Destroy(other.gameObject);
+            return;
         }
 
         Destroy(other.gameObject);
