@@ -157,7 +157,7 @@ MonoBehaviour:
   talkPrompt: {fileID: 142990204}
   message: 
   typingSpeed: 0.04
-  levelKey: Level1
+  levelKey: Level3
   sceneToLoad: 
 --- !u!58 &46068887
 CircleCollider2D:
@@ -1029,7 +1029,7 @@ MonoBehaviour:
     Press
     y when you''re ready.'
   typingSpeed: 0.04
-  levelKey: Level1
+  levelKey: Level2
   sceneToLoad: Level2Scene
 --- !u!58 &425392482
 CircleCollider2D:
@@ -1762,7 +1762,7 @@ MonoBehaviour:
     reach you, your burnout meter will go up. Fix the problem before the system crashes.
     (Y/N) "
   typingSpeed: 0.04
-  levelKey: Level1
+  levelKey: Level4
   sceneToLoad: Level4_BugSquasher
 --- !u!58 &646720221
 CircleCollider2D:
@@ -1978,7 +1978,7 @@ MonoBehaviour:
     to fight and drag the files. Oh...and you won't know what door to merge to since
     Git doesn't actually make sense.
   typingSpeed: 0.04
-  levelKey: Level1
+  levelKey: Level5
   sceneToLoad: Level5_Scene
 --- !u!58 &701184583
 CircleCollider2D:
@@ -2895,7 +2895,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PauseManager
   pauseMenu: {fileID: 1505821158}
   marksText: {fileID: 1715049287}
-  winButton: {fileID: 0}
+  winButton: {fileID: 1361891510}
 --- !u!1 &1501154229
 GameObject:
   m_ObjectHideFlags: 0
