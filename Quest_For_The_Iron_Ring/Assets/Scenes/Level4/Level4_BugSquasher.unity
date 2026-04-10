@@ -2463,7 +2463,7 @@ MonoBehaviour:
   - {fileID: 481372405, guid: e2cd960d6103e434fa48a7c7e078117b, type: 3}
   instructionPanel: {fileID: 171657777}
   instructionText: {fileID: 1044113119}
-  startDelay: 5
+  startDelay: 10
 --- !u!1 &1653228088
 GameObject:
   m_ObjectHideFlags: 0
