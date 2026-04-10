@@ -29,7 +29,7 @@ public class ProjectileBehavior : MonoBehaviour
         Destroy(gameObject);
     }
 
-    protected virtual void Collision(PlayerController player)
+    protected virtual void Collision(PlayerController3 player)
     {
         player.UpdateHealth(-damage);
         Despawn();
@@ -37,7 +37,7 @@ public class ProjectileBehavior : MonoBehaviour
 
     protected virtual void OnTriggerEnter2D(Collider2D other)
     {
-        PlayerController player = other.GetComponent<PlayerController>();
+        PlayerController3 player = other.GetComponent<PlayerController3>();
         if (player != null)
         {
             Collision(player);

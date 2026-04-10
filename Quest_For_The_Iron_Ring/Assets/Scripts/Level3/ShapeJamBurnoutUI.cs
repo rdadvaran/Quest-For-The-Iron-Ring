@@ -5,7 +5,7 @@ public class ShapeJamBurnoutUI : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Image burnoutImage;
-    [SerializeField] private PlayerController player;
+    [SerializeField] private PlayerController3 player;
 
     [Header("Burnout Frames")]
     [SerializeField] private Sprite[] burnoutSprites;
@@ -19,7 +19,7 @@ public class ShapeJamBurnoutUI : MonoBehaviour
 
         if (player == null)
         {
-            player = FindObjectOfType<PlayerController>();
+            player = FindObjectOfType<PlayerController3>();
         }
 
         UpdateBurnoutSprite();
@@ -29,7 +29,7 @@ public class ShapeJamBurnoutUI : MonoBehaviour
     {
         if (player == null)
         {
-            player = FindObjectOfType<PlayerController>();
+            player = FindObjectOfType<PlayerController3>();
         }
 
         UpdateBurnoutSprite();

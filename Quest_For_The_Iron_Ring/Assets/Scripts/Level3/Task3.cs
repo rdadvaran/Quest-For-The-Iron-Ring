@@ -35,7 +35,7 @@ public class Task3 : MonoBehaviour
     private int currentPhase = 1;
     private int iconsCollected = 0;
 
-    private PlayerController player;
+    private PlayerController3 player;
 
     public int Phase => currentPhase;
     public int IconsCollected => iconsCollected;
@@ -90,7 +90,7 @@ public class Task3 : MonoBehaviour
 
         if (playerObject != null)
         {
-            player = playerObject.GetComponent<PlayerController>();
+            player = playerObject.GetComponent<PlayerController3>();
         }
     }
 

@@ -194,7 +194,7 @@ GameObject:
   - component: {fileID: 7633321193816944532}
   - component: {fileID: 9027475977135268425}
   - component: {fileID: 4824128597234810723}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: BigBug
   m_TagString: BigBug
   m_Icon: {fileID: 0}

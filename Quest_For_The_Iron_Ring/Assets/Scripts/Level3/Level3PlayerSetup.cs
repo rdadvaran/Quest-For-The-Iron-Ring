@@ -15,10 +15,10 @@ public class Level3PlayerSetup : MonoBehaviour
         if (playerObject == null) return;
 
         // Add health/controller script only to this spawned instance
-        PlayerController playerController = playerObject.GetComponent<PlayerController>();
-        if (playerController == null)
+        PlayerController3 playerController3 = playerObject.GetComponent<PlayerController3>();
+        if (playerController3 == null)
         {
-            playerObject.AddComponent<PlayerController>();
+            playerObject.AddComponent<PlayerController3>();
         }
 
         // Adjust movement speed only for this spawned instance

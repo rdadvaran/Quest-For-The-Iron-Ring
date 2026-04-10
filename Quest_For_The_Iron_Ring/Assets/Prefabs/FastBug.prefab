@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 641654548648267164}
   - component: {fileID: 566798305397113784}
   - component: {fileID: 3648759030203246593}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: FastBug
   m_TagString: Bug
   m_Icon: {fileID: 0}
