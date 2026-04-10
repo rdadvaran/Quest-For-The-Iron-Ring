@@ -60,7 +60,7 @@ public class LevelEndManager : MonoBehaviour
         float burnoutPercent = (1f - ((float)burnoutLevel / maxBurnout)) * 100f;
 
         float finalPercent = (bugPercent * bugWeight) + (burnoutPercent * burnoutWeight);
-
+        MarkSaver.Instance.SaveGrade("Level4", Mathf.Clamp(finalPercent, 0f, 100f));
         return Mathf.Clamp(finalPercent, 0f, 100f);
     }
 
