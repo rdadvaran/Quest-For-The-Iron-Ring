@@ -1614,9 +1614,13 @@ MonoBehaviour:
   dialogueBox: {fileID: 2114342402}
   dialogueText: {fileID: 1044811682}
   talkPrompt: {fileID: 142990204}
-  message: 
+  message: "Looks like your program compiled\u2026 but unfortunately it also created
+    a lot of bugs. Your job now is to debug the system by squashing them before the
+    deadline. Be careful \u2014 some bugs move faster than others, and if too many
+    reach you, your burnout meter will go up. Fix the problem before the system crashes.
+    (Y/N) "
   typingSpeed: 0.04
-  sceneToLoad: 
+  sceneToLoad: Level4_BugSquasher
 --- !u!58 &646720221
 CircleCollider2D:
   m_ObjectHideFlags: 0
