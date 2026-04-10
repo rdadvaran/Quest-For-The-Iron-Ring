@@ -38,7 +38,7 @@ public class Level2Manager : MonoBehaviour
         markManager.Setup(tasks.Count);
         GlobalGameManager.Instance.ResetGameData();
 
-        isHackerPlayer = GameSession.Instance != null && GameSession.Instance.selectedCharacter == "Hacker_Player";
+        isHackerPlayer = GameSession.Instance != null && (GameSession.Instance.selectedCharacter == "Hacker_Player" || GameSession.Instance.selectedCharacter == "AI_Player");
         float baseTime = deadlineManager.GetTimeBasedOnDifficulty();
         if (isHackerPlayer)
         {

@@ -132,6 +132,7 @@ public class GlobalGameManager : MonoBehaviour
 
     public bool DidPlayerPass()
     {
+        MarkSaver.Instance.SaveGrade("Level1",GetGradePercentage());
         return GetGradePercentage() >= GetPassingPercentage();
     }
 

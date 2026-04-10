@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class playerMovement : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float moveSpeed = 12f;
 
     private Rigidbody2D rb;
     private Vector2 moveInput;
@@ -50,12 +50,6 @@ public class playerMovement : MonoBehaviour
                 animator.SetFloat("LastInputY", moveInput.y);
             }
         }
-    }
-
-    // for level 3
-    public void SetMoveSpeed(float newSpeed)
-    {
-        moveSpeed = newSpeed;
     }
 
     public void SetNearbyBug(Bug bug)
