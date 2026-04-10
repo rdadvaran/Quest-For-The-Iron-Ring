@@ -52,6 +52,12 @@ public class playerMovement : MonoBehaviour
         }
     }
 
+    // for level 3
+    public void SetMoveSpeed(float newSpeed)
+    {
+        moveSpeed = newSpeed;
+    }
+
     public void SetNearbyBug(Bug bug)
     {
         nearbyBug = bug;
