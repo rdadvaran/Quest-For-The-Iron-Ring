@@ -126,15 +126,29 @@ public class NPCInteraction : MonoBehaviour
             return;
         }
 
-        if (MarkSaver.Instance != null && !MarkSaver.Instance.CanEnterLevel(levelKey))
+        if (MarkSaver.Instance != null)
         {
-            if (dialogueText != null)
+            if (!MarkSaver.Instance.CanEnterLevelInOrder(levelKey))
             {
-                dialogueText.text = "You already passed this level, so this room is locked.";
+                if (dialogueText != null)
+                {
+                    dialogueText.text = "You must complete previous levels before entering this one.";
+                }
+
+                waitingForChoice = false;
+                return;
             }
 
-            waitingForChoice = false;
-            return;
+            if (!MarkSaver.Instance.CanEnterLevel(levelKey))
+            {
+                if (dialogueText != null)
+                {
+                    dialogueText.text = "You already passed this challenge.";
+                }
+
+                waitingForChoice = false;
+                return;
+            }
         }
 
         SceneManager.LoadScene(sceneToLoad);

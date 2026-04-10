@@ -1017,17 +1017,9 @@ MonoBehaviour:
   dialogueBox: {fileID: 2114342402}
   dialogueText: {fileID: 1044811682}
   talkPrompt: {fileID: 142990204}
-  message: 'This is the challenge room.
-
-    Fill in the missing parts of each code
-    prompt.
-
-    You have two minutes.
-
-    Score at least 60 percent to pass.
-
-    Press
-    y when you''re ready.'
+  message: This is the challenge room. Fill in the missing parts of each code prompt.
+    You have two minutes. Score at least 60 percent to pass. Press y when you're
+    ready.
   typingSpeed: 0.04
   levelKey: Level2
   sceneToLoad: Level2Scene
