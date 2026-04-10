@@ -1455,10 +1455,10 @@ MonoBehaviour:
   finalGradeText: {fileID: 566632127}
   returnDelay: 5
   hallwaySceneName: Hallway_Scene
-  targetBugScore: 20
+  targetBugScore: 100
   passThreshold: 75
-  bugWeight: 0.7
-  burnoutWeight: 0.3
+  bugWeight: 0.75
+  burnoutWeight: 0.25
 --- !u!1 &888849507
 GameObject:
   m_ObjectHideFlags: 0
@@ -2790,7 +2790,7 @@ MonoBehaviour:
   fastBugPrefab: {fileID: 427921861}
   bigBugPrefab: {fileID: 150395148}
   spawnInterval: 2
-  maxBugs: 9
+  maxBugs: 12
   minX: -9.3
   maxX: 7
   minY: -5

@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Image burnoutMeterImage;
     [SerializeField] private Sprite[] burnoutMeterSprites;
-    
+
     private int fastBugHitCounter = 0;
     private int fastBugKillCounter = 0;
 
@@ -49,8 +49,9 @@ public class GameManager : MonoBehaviour
         if (timer <= 0f)
         {
             timer = 0f;
-            burnoutLevel = maxBurnout;
-            EndGame("Time ran out!");
+            UpdateUI();
+            EndLevelWithGrade();
+            return;
         }
 
         UpdateUI();
@@ -82,24 +83,31 @@ public class GameManager : MonoBehaviour
     }
 
     public void AddBurnout(int amount)
-{
-    if (gameEnded) return;
-
-    burnoutLevel += amount;
-
-    if (burnoutLevel >= maxBurnout)
     {
-        burnoutLevel = maxBurnout;
-        gameEnded = true;
+        if (gameEnded) return;
 
-        if (LevelEndManager.Instance != null)
+        burnoutLevel += amount;
+
+        if (burnoutLevel >= maxBurnout)
         {
-            LevelEndManager.Instance.TriggerGameOver();
-        }
-    }
+            burnoutLevel = maxBurnout;
+            gameEnded = true;
+            UpdateUI();
 
-    UpdateUI();
-}
+            if (LevelEndManager.Instance != null)
+            {
+                LevelEndManager.Instance.TriggerGameOver();
+            }
+            else
+            {
+                Debug.LogWarning("LevelEndManager instance is missing.");
+            }
+
+            return;
+        }
+
+        UpdateUI();
+    }
 
     public void ReduceBurnout(int amount)
     {
@@ -121,19 +129,39 @@ public class GameManager : MonoBehaviour
         UpdateUI();
     }
 
-    private void EndGame(string reason)
+    private void EndLevelWithGrade()
     {
+        if (gameEnded) return;
+
         gameEnded = true;
-        UpdateUI();
-        Debug.Log("Game Over: " + reason);
-        Time.timeScale = 0f;
+
+        Debug.Log($"Level ended. Score: {bugsSquashed}, Burnout: {burnoutLevel}/{maxBurnout}");
+
+        if (LevelEndManager.Instance != null)
+        {
+            LevelEndManager.Instance.TriggerPassFail(bugsSquashed, burnoutLevel, maxBurnout);
+        }
+        else
+        {
+            Debug.LogWarning("LevelEndManager instance is missing.");
+        }
     }
 
     public int GetBurnoutLevel()
     {
         return burnoutLevel;
     }
-    
+
+    public int GetMaxBurnout()
+    {
+        return maxBurnout;
+    }
+
+    public float GetScore()
+    {
+        return bugsSquashed;
+    }
+
     public void RegisterFastBugHit()
     {
         if (gameEnded) return;
