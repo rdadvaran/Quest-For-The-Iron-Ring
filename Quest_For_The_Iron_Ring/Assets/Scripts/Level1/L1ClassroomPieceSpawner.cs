@@ -51,7 +51,7 @@ public class L1ClassroomPieceSpawner : MonoBehaviour
                     break;
 
                 case "Perfectionist":
-                    difficultyValue = 4;
+                    difficultyValue = 3;
                     break;
 
                 default:
