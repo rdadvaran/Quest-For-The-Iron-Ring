@@ -8,11 +8,9 @@ public class MarkSaver : MonoBehaviour
 
     private Dictionary<string, float> grades = new Dictionary<string, float>();
 
-    // Set your level names here
-    private string[] levelNames = { "Level1", "Level2", "Level3", "Level4", "Level5" };
+    private string[] levelNames = { "Level1", "Level2", "Level3", "Level4", "Level5"};
 
-    // Change this if your passing grade is different
-    [SerializeField] private float passingGrade = 50f;
+    [SerializeField] private float passingGrade = 60f;
 
     private void Awake()
     {

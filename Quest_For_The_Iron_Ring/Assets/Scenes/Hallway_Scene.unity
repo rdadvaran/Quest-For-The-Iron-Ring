@@ -1408,7 +1408,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 583300743}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 665c029f11751421eaec95b2501c36c7, type: 3}
   m_Name: 
@@ -1432,7 +1432,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 583300743}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97861372e062f524b8b3b1f6c4935a5e, type: 3}
   m_Name: 
@@ -1450,7 +1450,7 @@ MonoBehaviour:
     again.'
   typingSpeed: 0.02
   sceneToLoad: L1_Clasroom
-  levelKey: Level1Passed
+  levelKey: Level1
 --- !u!1 &618124457
 GameObject:
   m_ObjectHideFlags: 0

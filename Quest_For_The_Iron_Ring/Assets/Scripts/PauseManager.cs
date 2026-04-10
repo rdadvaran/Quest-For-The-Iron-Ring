@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static System.Net.Mime.MediaTypeNames;
 
 public class Pause_Manager : MonoBehaviour
 {
@@ -60,5 +61,21 @@ public class Pause_Manager : MonoBehaviour
         bool canWin = MarkSaver.Instance != null && MarkSaver.Instance.HasPassedAllLevels();
         winButton.gameObject.SetActive(canWin);
         Debug.Log("Win Button Updated: " + MarkSaver.Instance.HasPassedAllLevels());
+    }
+
+    public void WinGame()
+    {
+        if (MarkSaver.Instance != null)
+        {
+            MarkSaver.Instance.ResetGrades();
+        }
+
+        Time.timeScale = 1f;
+
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #else
+        Application.Quit();
+        #endif
     }
 }
