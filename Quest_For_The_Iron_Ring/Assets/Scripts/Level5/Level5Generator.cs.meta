@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 9e35c5750cdeddc45b57176e128f6e21
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - platformPrefab: {instanceID: 0}
+  - enemyPrefab: {instanceID: 0}
+  - doorPrefab: {instanceID: 0}
+  - playerBulletPrefab: {fileID: 7159695470161866627, guid: b7d9215231e900142afbf0a70788857c, type: 3}
+  - platformSpawnParent: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
