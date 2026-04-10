@@ -8,6 +8,7 @@ public class Task3 : MonoBehaviour
     [SerializeField] private float levelTime = 180f;
     [SerializeField] private string hubSceneName = "Hallway";
     [SerializeField] private int maxIconsForGrade = 20;
+    [SerializeField] public float FinalGrade = 0; // final grade for jami
     [SerializeField] private float endScreenDuration = 10f;
 
     [Header("Phase Times")]
@@ -152,6 +153,7 @@ public class Task3 : MonoBehaviour
 
         levelEnded = true;
         ShowWinScreen();
+        FinalGrade = ((float)iconsCollected / maxIconsForGrade) * 100f; // final grade of jami
 
         Invoke(nameof(ReturnToHub), endScreenDuration);
     }

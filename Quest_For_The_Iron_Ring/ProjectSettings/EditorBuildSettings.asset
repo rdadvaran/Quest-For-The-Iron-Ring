@@ -4,31 +4,6 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
-  - enabled: 1
-    path: Assets/Scenes/Main_Menu.unity
-    guid: 9a9ebb44b68643a48b08240662640756
-  - enabled: 1
-    path: Assets/Scenes/Hallway_Scene.unity
-    guid: 8c86999d7fe944acda7e01ccc7db8b6e
-  - enabled: 1
-    path: Assets/Scenes/Level1/L1_Clasroom.unity
-    guid: 0d86c60341525e94991d3d99035fed9d
-  - enabled: 1
-    path: Assets/Scenes/Level1/L1_JigsawPuzzle.unity
-    guid: 5bc63b6f843b52b459b7b95e8b3ebdc1
-  - enabled: 1
-    path: Assets/Scenes/Level2Scene.unity
-    guid: f0218168c50aeb34db5afbe8803580dd
-  - enabled: 1
-    path: Assets/Scenes/Level5_Scene.unity
-    guid: 9154df8bda3ac414baa1c4735f3cfd05
-  - enabled: 1
-    path: Assets/Scenes/Level4/Level4_BugSquasher.unity
-    guid: 7a665d7649d634f75bee40788bdcee18
-  m_configObjects:
-    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  m_Scenes: []
+  m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
