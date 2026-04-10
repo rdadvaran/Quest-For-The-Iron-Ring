@@ -50,9 +50,9 @@ public class Level5Generator : MonoBehaviour
         
         GameObject selectedPrefab = characterPrefabs[0];
         
-        if (GameManager.Instance != null)
+        if (GameManager5.Instance != null)
         {
-            string character = GameManager.Instance.selectedCharacter;
+            string character = GameManager5.Instance.selectedCharacter;
             foreach (GameObject prefab in characterPrefabs)
             {
                 if (prefab.name.Trim() == character.Trim())

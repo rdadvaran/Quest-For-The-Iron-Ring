@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager5 : MonoBehaviour
 {
-    public static GameManager Instance;
+    public static GameManager5 Instance;
 
     public string selectedCharacter = "Player";
     public string selectedDifficulty = "AverageJoe";

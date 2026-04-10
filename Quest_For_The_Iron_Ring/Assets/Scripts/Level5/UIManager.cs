@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class UIManager : MonoBehaviour
@@ -28,6 +29,11 @@ public class UIManager : MonoBehaviour
         subText.text = "";
     }
 
+    void ReturnToHallway()
+    {
+        SceneManager.LoadScene("Hallway_Scene");
+    }
+
     public void UpdateBurnout(int hp)
     {
         burnoutText.text = "Burnout: " + hp;
@@ -49,9 +55,9 @@ public class UIManager : MonoBehaviour
 
         if (pushed)
         {
-            if (GameManager.Instance != null)
+            if (GameManager5.Instance != null)
             {
-                GameManager.Instance.enemiesPushed++;
+                GameManager5.Instance.enemiesPushed++;
             }
         }
 
@@ -85,6 +91,8 @@ public class UIManager : MonoBehaviour
 
         centerText.text = "Commit Failed";
         subText.text = "";
+
+        Invoke(nameof(ReturnToHallway), 5f);
     }
 
     void EndLevel()
@@ -98,10 +106,10 @@ public class UIManager : MonoBehaviour
         int pushed = 0;
         string difficulty = "";
 
-        if (GameManager.Instance != null)
+        if (GameManager5.Instance != null)
         {
-            pushed = GameManager.Instance.enemiesPushed;
-            difficulty = GameManager.Instance.selectedDifficulty;
+            pushed = GameManager5.Instance.enemiesPushed;
+            difficulty = GameManager5.Instance.selectedDifficulty;
         }
 
         bool passed = false;
@@ -111,9 +119,9 @@ public class UIManager : MonoBehaviour
         if ((difficulty == "Goody 2 Shoes" || difficulty == "Goody2Shoes") && pushed >= 3) passed = true;
         if (difficulty == "Perfectionist" && pushed >= 4) passed = true;
 
-        if(GameManager.Instance != null)
+        if(GameManager5.Instance != null)
         {
-            GameManager.Instance.isLevel5Completed = passed;
+            GameManager5.Instance.isLevel5Completed = passed;
         }
 
         subText.gameObject.SetActive(true);
@@ -122,5 +130,7 @@ public class UIManager : MonoBehaviour
         Debug.Log("Difficulty = " + difficulty);
         Debug.Log("Enemies Pushed = " + pushed);
         Debug.Log("SubText = " + subText.text);
+
+        Invoke(nameof(ReturnToHallway), 5f);
     }
 }

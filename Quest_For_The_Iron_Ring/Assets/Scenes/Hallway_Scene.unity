@@ -1831,9 +1831,11 @@ MonoBehaviour:
   dialogueBox: {fileID: 2114342402}
   dialogueText: {fileID: 1044811682}
   talkPrompt: {fileID: 142990204}
-  message: 
+  message: The last step, pushing to Git. It's really going to feel like you have
+    to fight and drag the files. Oh...and you won't know what door to merge to since
+    Git doesn't actually make sense.
   typingSpeed: 0.04
-  sceneToLoad: 
+  sceneToLoad: Level5_Scene
 --- !u!58 &701184583
 CircleCollider2D:
   m_ObjectHideFlags: 0

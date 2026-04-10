@@ -38,9 +38,9 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        if (GameManager.Instance != null)
+        if (GameManager5.Instance != null)
         {
-            characterType = GameManager.Instance.selectedCharacter;
+            characterType = GameManager5.Instance.selectedCharacter;
         }
     }
 
