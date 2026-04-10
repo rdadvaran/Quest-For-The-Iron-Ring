@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
 
     private int filesRemaining = 4;
     private bool levelEnded = false;
+    private int leve5Grade = 0;
 
     void Awake()
     {
@@ -55,10 +56,7 @@ public class UIManager : MonoBehaviour
 
         if (pushed)
         {
-            if (GameManager5.Instance != null)
-            {
-                GameManager5.Instance.enemiesPushed++;
-            }
+            GameManager5.Instance.enemiesPushed++;
         }
 
         filesRemaining--;
@@ -104,7 +102,7 @@ public class UIManager : MonoBehaviour
         centerText.text = "Game Over";
 
         int pushed = 0;
-        string difficulty = "";
+        string difficulty = "AverageJoe";
 
         if (GameManager5.Instance != null)
         {
@@ -114,14 +112,29 @@ public class UIManager : MonoBehaviour
 
         bool passed = false;
 
-        if ((difficulty == "Idle Slacker" || difficulty == "IdleSlacker") && pushed >= 2) passed = true;
-        if ((difficulty == "Average Joe" || difficulty == "AverageJoe") && pushed >= 3) passed = true;
-        if ((difficulty == "Goody 2 Shoes" || difficulty == "Goody2Shoes") && pushed >= 3) passed = true;
-        if (difficulty == "Perfectionist" && pushed >= 4) passed = true;
-
-        if(GameManager5.Instance != null)
+        if ((difficulty == "Idle Slacker" || difficulty == "IdleSlacker") && pushed == 1)
         {
-            GameManager5.Instance.isLevel5Completed = passed;
+            passed = true;
+            leve5Grade = 50;
+            GameManager5.Instance.isLevel5Completed = true;
+        }
+        if ((difficulty == "Average Joe" || difficulty == "AverageJoe") && pushed == 2)
+        {
+            passed = true;
+            leve5Grade = 70;
+            GameManager5.Instance.isLevel5Completed = true;
+        }
+        if ((difficulty == "Goody 2 Shoes" || difficulty == "Goody2Shoes") && pushed == 3)
+        {
+            passed = true;
+            leve5Grade = 85;
+            GameManager5.Instance.isLevel5Completed = true;
+        }
+        if (difficulty == "Perfectionist" && pushed >= 4)
+        {
+            passed = true;
+            leve5Grade = 100;
+            GameManager5.Instance.isLevel5Completed = true;
         }
 
         subText.gameObject.SetActive(true);
