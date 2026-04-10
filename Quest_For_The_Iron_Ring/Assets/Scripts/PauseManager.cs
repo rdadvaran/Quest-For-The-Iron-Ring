@@ -1,16 +1,21 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class Pause_Manager : MonoBehaviour
 {
     public GameObject pauseMenu;
     public TMP_Text marksText;
+    public Button winButton;
 
     private bool isPaused = false;
 
     void Start()
     {
         pauseMenu.SetActive(false);
+
+        if (winButton != null)
+            winButton.gameObject.SetActive(false);
     }
 
     void Update()
@@ -31,6 +36,7 @@ public class Pause_Manager : MonoBehaviour
         isPaused = true;
 
         UpdateMarksUI();
+        UpdateWinButton();
     }
 
     public void Resume()
@@ -43,12 +49,17 @@ public class Pause_Manager : MonoBehaviour
     private void UpdateMarksUI()
     {
         if (marksText != null && MarkSaver.Instance != null)
-        {
             marksText.text = MarkSaver.Instance.GetAllGradesText();
-        }
-        else if (marksText != null)
-        {
-            marksText.text = "No marks available.";
-        }
+    }
+
+    private void UpdateWinButton()
+    {
+        if (winButton == null)
+            return;
+
+        if (MarkSaver.Instance != null && MarkSaver.Instance.HasPassedAllLevels())
+            winButton.gameObject.SetActive(true);
+        else
+            winButton.gameObject.SetActive(false);
     }
 }

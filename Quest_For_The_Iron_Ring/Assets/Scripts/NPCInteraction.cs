@@ -1,8 +1,9 @@
 using System.Collections;
+using System.Diagnostics;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using TMPro;
 
 public class NPCInteraction : MonoBehaviour
 {
@@ -16,7 +17,8 @@ public class NPCInteraction : MonoBehaviour
     [SerializeField] private string message = "TA: Welcome! Are you ready for your first challenge?\n\nPress Y for Yes or N for No.";
     [SerializeField] private float typingSpeed = 0.04f;
 
-    [Header("Scene To Load")]
+    [Header("Level Info")]
+    [SerializeField] private string levelKey = "Level1";
     [SerializeField] private string sceneToLoad = "L1_Classroom";
 
     private bool playerInRange = false;
@@ -122,6 +124,17 @@ public class NPCInteraction : MonoBehaviour
         if (string.IsNullOrWhiteSpace(sceneToLoad))
         {
             Debug.LogWarning("Scene name is empty on " + gameObject.name);
+            return;
+        }
+
+        if (MarkSaver.Instance != null && !MarkSaver.Instance.CanEnterLevel(levelKey))
+        {
+            if (dialogueText != null)
+            {
+                dialogueText.text = "You already passed this level, so this room is locked.";
+            }
+
+            waitingForChoice = false;
             return;
         }
 
