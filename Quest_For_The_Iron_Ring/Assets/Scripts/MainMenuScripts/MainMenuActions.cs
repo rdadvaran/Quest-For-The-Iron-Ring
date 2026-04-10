@@ -67,4 +67,10 @@ public class MainMenuActions : MonoBehaviour
 
         Debug.Log("Selected Difficulty: " + difficulty);
     }
+
+    //To keep character and difficulty variables
+    void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
 }

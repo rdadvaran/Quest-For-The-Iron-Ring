@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
@@ -6,22 +7,31 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    [Header("Gameplay")]
     [SerializeField] private float timer = 60f;
     [SerializeField] private int burnoutLevel = 0;
     [SerializeField] private int maxBurnout = 5;
     [SerializeField] private float bugsSquashed = 0f;
 
+    [Header("UI")]
     [SerializeField] private TMP_Text timerText;
     [SerializeField] private TMP_Text scoreText;
     [SerializeField] private TMP_Text burnoutText;
 
+    [Header("Burnout Meter")]
     [SerializeField] private Image burnoutMeterImage;
     [SerializeField] private Sprite[] burnoutMeterSprites;
-    
+
+    [Header("Start Countdown")]
+    [SerializeField] private GameObject instructionPanel;
+    [SerializeField] private TMP_Text instructionText;
+    [SerializeField] private float startDelay = 5f;
+
     private int fastBugHitCounter = 0;
     private int fastBugKillCounter = 0;
 
     private bool gameEnded = false;
+    private bool gameStarted = false;
 
     private void Awake()
     {
@@ -36,12 +46,14 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        ApplyDifficultyTimer();
         UpdateUI();
+        StartCoroutine(StartGameCountdown());
     }
 
     private void Update()
     {
-        if (gameEnded)
+        if (gameEnded || !gameStarted)
             return;
 
         timer -= Time.deltaTime;
@@ -49,11 +61,77 @@ public class GameManager : MonoBehaviour
         if (timer <= 0f)
         {
             timer = 0f;
-            burnoutLevel = maxBurnout;
-            EndGame("Time ran out!");
+            UpdateUI();
+            EndLevelWithGrade();
+            return;
         }
 
         UpdateUI();
+    }
+
+    private void ApplyDifficultyTimer()
+    {
+        if (DifficultyManager.Instance == null)
+            return;
+
+        switch (DifficultyManager.Instance.GetDifficulty())
+        {
+            case DifficultyManager.Difficulty.IdleSlacker:
+                timer = 75f;
+                break;
+
+            case DifficultyManager.Difficulty.AverageJoe:
+                timer = 65f;
+                break;
+
+            case DifficultyManager.Difficulty.Goody2Shoes:
+                timer = 60f;
+                break;
+
+            case DifficultyManager.Difficulty.Perfectionist:
+                timer = 55f;
+                break;
+        }
+
+        Debug.Log("Timer set to: " + timer);
+    }
+
+    private IEnumerator StartGameCountdown()
+    {
+        gameStarted = false;
+        Time.timeScale = 0f;
+
+        if (instructionPanel != null)
+            instructionPanel.SetActive(true);
+
+        int countdownSeconds = Mathf.CeilToInt(startDelay);
+
+        for (int i = countdownSeconds; i > 0; i--)
+        {
+            if (instructionText != null)
+            {
+                instructionText.text =
+                    "WASD - MOVE\n" +
+                    "SPACEBAR - SQUASH BUGS\n" +
+                    "AVOID BURNOUT!\n\n" +
+                    "GAME STARTING IN " + i + "...";
+            }
+
+            yield return new WaitForSecondsRealtime(1f);
+        }
+
+        if (instructionText != null)
+        {
+            instructionText.text = "GO!";
+        }
+
+        yield return new WaitForSecondsRealtime(0.5f);
+
+        if (instructionPanel != null)
+            instructionPanel.SetActive(false);
+
+        Time.timeScale = 1f;
+        gameStarted = true;
     }
 
     private void UpdateUI()
@@ -67,7 +145,10 @@ public class GameManager : MonoBehaviour
         if (burnoutText != null)
             burnoutText.text = "BURNOUT: " + burnoutLevel + "/" + maxBurnout;
 
-        if (burnoutMeterImage != null && burnoutMeterSprites != null && burnoutLevel >= 0 && burnoutLevel < burnoutMeterSprites.Length)
+        if (burnoutMeterImage != null &&
+            burnoutMeterSprites != null &&
+            burnoutLevel >= 0 &&
+            burnoutLevel < burnoutMeterSprites.Length)
         {
             burnoutMeterImage.sprite = burnoutMeterSprites[burnoutLevel];
         }
@@ -75,35 +156,42 @@ public class GameManager : MonoBehaviour
 
     public void AddScore(float amount)
     {
-        if (gameEnded) return;
+        if (gameEnded || !gameStarted) return;
 
         bugsSquashed += amount;
         UpdateUI();
     }
 
     public void AddBurnout(int amount)
-{
-    if (gameEnded) return;
-
-    burnoutLevel += amount;
-
-    if (burnoutLevel >= maxBurnout)
     {
-        burnoutLevel = maxBurnout;
-        gameEnded = true;
+        if (gameEnded || !gameStarted) return;
 
-        if (LevelEndManager.Instance != null)
+        burnoutLevel += amount;
+
+        if (burnoutLevel >= maxBurnout)
         {
-            LevelEndManager.Instance.TriggerGameOver();
-        }
-    }
+            burnoutLevel = maxBurnout;
+            gameEnded = true;
+            UpdateUI();
 
-    UpdateUI();
-}
+            if (LevelEndManager.Instance != null)
+            {
+                LevelEndManager.Instance.TriggerGameOver();
+            }
+            else
+            {
+                Debug.LogWarning("LevelEndManager instance is missing.");
+            }
+
+            return;
+        }
+
+        UpdateUI();
+    }
 
     public void ReduceBurnout(int amount)
     {
-        if (gameEnded) return;
+        if (gameEnded || !gameStarted) return;
 
         burnoutLevel -= amount;
 
@@ -115,28 +203,53 @@ public class GameManager : MonoBehaviour
 
     public void AddTime(float amount)
     {
-        if (gameEnded) return;
+        if (gameEnded || !gameStarted) return;
 
         timer += amount;
         UpdateUI();
     }
 
-    private void EndGame(string reason)
+    private void EndLevelWithGrade()
     {
+        if (gameEnded) return;
+
         gameEnded = true;
-        UpdateUI();
-        Debug.Log("Game Over: " + reason);
-        Time.timeScale = 0f;
+
+        Debug.Log($"Level ended. Score: {bugsSquashed}, Burnout: {burnoutLevel}/{maxBurnout}");
+
+        if (LevelEndManager.Instance != null)
+        {
+            LevelEndManager.Instance.TriggerPassFail(bugsSquashed, burnoutLevel, maxBurnout);
+        }
+        else
+        {
+            Debug.LogWarning("LevelEndManager instance is missing.");
+        }
     }
 
     public int GetBurnoutLevel()
     {
         return burnoutLevel;
     }
-    
+
+    public int GetMaxBurnout()
+    {
+        return maxBurnout;
+    }
+
+    public float GetScore()
+    {
+        return bugsSquashed;
+    }
+
+    public bool HasGameStarted()
+    {
+        return gameStarted;
+    }
+
     public void RegisterFastBugHit()
     {
-        if (gameEnded) return;
+        if (gameEnded || !gameStarted) return;
 
         fastBugHitCounter++;
 
@@ -149,7 +262,7 @@ public class GameManager : MonoBehaviour
 
     public void RegisterFastBugKill()
     {
-        if (gameEnded) return;
+        if (gameEnded || !gameStarted) return;
 
         fastBugKillCounter++;
 

@@ -14,7 +14,7 @@ public class SphereBehavior : ProjectileBehavior
         transform.Translate(moveDirection * speed * Time.deltaTime);
     }
 
-    protected override void Collision(PlayerController player)
+    protected override void Collision(PlayerController3 player)
     {
         player.UpdateHealth(-1);
         Despawn();

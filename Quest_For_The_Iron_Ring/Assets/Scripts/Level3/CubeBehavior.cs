@@ -65,14 +65,14 @@ public class CubeBehavior : MonoBehaviour
         // Cube does not despawn in this level
     }
 
-    public void Collision(PlayerController player)
+    public void Collision(PlayerController3 player)
     {
         player.UpdateHealth(-1);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        PlayerController player = other.GetComponent<PlayerController>();
+        PlayerController3 player = other.GetComponent<PlayerController3>();
         if (player != null)
         {
             Collision(player);
