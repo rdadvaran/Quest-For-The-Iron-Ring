@@ -9,6 +9,7 @@ TagManager:
   - Door
   - BigBug
   - Bug
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - Door
   - PlayerBullet
   - Bug
-  - 
+  - BugWall
   - 
   - 
   - 
