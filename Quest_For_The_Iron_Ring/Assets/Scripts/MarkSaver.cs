@@ -8,7 +8,7 @@ public class MarkSaver : MonoBehaviour
 
     private Dictionary<string, float> grades = new Dictionary<string, float>();
 
-    private string[] levelNames = { "Level1", "Level2", "Level3", "Level4", "Level5"};
+    private string[] levelNames = { "Level1", "Level2", "Level3", "Level4", "Level5" };
 
     [SerializeField] private float passingGrade = 60f;
 
@@ -151,5 +151,12 @@ public class MarkSaver : MonoBehaviour
         }
 
         return true;
+    }
+
+    private void OnApplicationQuit()
+    {
+    #if UNITY_EDITOR
+    ResetGrades();
+    #endif
     }
 }
