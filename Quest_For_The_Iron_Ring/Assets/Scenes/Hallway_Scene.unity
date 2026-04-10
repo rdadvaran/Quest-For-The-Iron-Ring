@@ -157,6 +157,7 @@ MonoBehaviour:
   talkPrompt: {fileID: 142990204}
   message: 
   typingSpeed: 0.04
+  levelKey: Level1
   sceneToLoad: 
 --- !u!58 &46068887
 CircleCollider2D:
@@ -898,9 +899,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: 'Finish Game
+
+'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 0}
+  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 0}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -967,7 +970,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &366965532
@@ -1026,6 +1029,7 @@ MonoBehaviour:
     Press
     y when you''re ready.'
   typingSpeed: 0.04
+  levelKey: Level1
   sceneToLoad: Level2Scene
 --- !u!58 &425392482
 CircleCollider2D:
@@ -1419,6 +1423,7 @@ MonoBehaviour:
     designed correctly, everything that follows can go wrong. Be quick, because your
     final grade will depend on your time. Are you ready to start Task 1? (Y/N)'
   typingSpeed: 0.02
+  levelKey: Level1
   sceneToLoad: L1_Clasroom
 --- !u!114 &583300751
 MonoBehaviour:
@@ -1757,6 +1762,7 @@ MonoBehaviour:
     reach you, your burnout meter will go up. Fix the problem before the system crashes.
     (Y/N) "
   typingSpeed: 0.04
+  levelKey: Level1
   sceneToLoad: Level4_BugSquasher
 --- !u!58 &646720221
 CircleCollider2D:
@@ -1972,6 +1978,7 @@ MonoBehaviour:
     to fight and drag the files. Oh...and you won't know what door to merge to since
     Git doesn't actually make sense.
   typingSpeed: 0.04
+  levelKey: Level1
   sceneToLoad: Level5_Scene
 --- !u!58 &701184583
 CircleCollider2D:
@@ -2888,6 +2895,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PauseManager
   pauseMenu: {fileID: 1505821158}
   marksText: {fileID: 1715049287}
+  winButton: {fileID: 0}
 --- !u!1 &1501154229
 GameObject:
   m_ObjectHideFlags: 0

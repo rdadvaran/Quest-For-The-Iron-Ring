@@ -1,5 +1,5 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class Pause_Manager : MonoBehaviour
@@ -57,9 +57,8 @@ public class Pause_Manager : MonoBehaviour
         if (winButton == null)
             return;
 
-        if (MarkSaver.Instance != null && MarkSaver.Instance.HasPassedAllLevels())
-            winButton.gameObject.SetActive(true);
-        else
-            winButton.gameObject.SetActive(false);
+        bool canWin = MarkSaver.Instance != null && MarkSaver.Instance.HasPassedAllLevels();
+        winButton.gameObject.SetActive(canWin);
+        Debug.Log("Win Button Updated: " + MarkSaver.Instance.HasPassedAllLevels());
     }
 }
