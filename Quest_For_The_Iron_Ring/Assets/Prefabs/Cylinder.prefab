@@ -152,5 +152,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CylinderBehavior
   speed: 3
-  lifetime: 3.8
+  lifetime: 8
   damage: 1

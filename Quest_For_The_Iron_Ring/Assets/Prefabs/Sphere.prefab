@@ -142,5 +142,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SphereBehavior
   speed: 3
-  lifetime: 2.65
+  lifetime: 8
   damage: 1
