@@ -2,13 +2,16 @@ using UnityEngine;
 
 public class BugSpawner : MonoBehaviour
 {
+    [Header("Bug Prefabs")]
     [SerializeField] private GameObject normalBugPrefab;
     [SerializeField] private GameObject fastBugPrefab;
     [SerializeField] private GameObject bigBugPrefab;
 
+    [Header("Spawn Settings")]
     [SerializeField] private float spawnInterval = 1.5f;
     [SerializeField] private int maxBugs = 8;
 
+    [Header("Spawn Area")]
     [SerializeField] private float minX = -6f;
     [SerializeField] private float maxX = 6f;
     [SerializeField] private float minY = -2.5f;
@@ -16,8 +19,33 @@ public class BugSpawner : MonoBehaviour
 
     private float spawnTimer = 0f;
 
+    private void Start()
+    {
+        ApplyDifficultySettings();
+    }
+
+    private void ApplyDifficultySettings()
+    {
+        if (DifficultyManager.Instance != null)
+        {
+            spawnInterval = DifficultyManager.Instance.GetSpawnInterval();
+            maxBugs = DifficultyManager.Instance.GetMaxBugsOnScreen();
+
+            Debug.Log("Difficulty applied: " + DifficultyManager.Instance.GetDifficulty());
+            Debug.Log("Spawn Interval = " + spawnInterval);
+            Debug.Log("Max Bugs = " + maxBugs);
+        }
+        else
+        {
+            Debug.LogWarning("DifficultyManager instance not found. Using default BugSpawner values.");
+        }
+    }
+
     private void Update()
     {
+        if (GameManager.Instance != null && !GameManager.Instance.HasGameStarted())
+            return;
+
         spawnTimer += Time.deltaTime;
 
         int totalBugCount =
