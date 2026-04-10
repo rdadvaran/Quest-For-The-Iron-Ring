@@ -1001,7 +1001,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 270}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 315, y: -110}
+  m_AnchoredPosition: {x: 310, y: -100}
   m_SizeDelta: {x: 300, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1390791070
@@ -1327,7 +1327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8644fe38f4c4004e8c45910d48e0369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Task3
-  levelTime: 180
+  levelTime: 10
   hubSceneName: Hallway_Scene
   maxIconsForGrade: 20
   endScreenDuration: 10
