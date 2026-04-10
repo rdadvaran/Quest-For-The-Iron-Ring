@@ -155,9 +155,15 @@ MonoBehaviour:
   dialogueBox: {fileID: 2114342402}
   dialogueText: {fileID: 1044811682}
   talkPrompt: {fileID: 142990204}
-  message: 
+  message: 'Now that you''ve done the code for your project, the next step is the
+    Shape Jam. You will need to dodge the crafty objects and collect the unity points
+    to complete your work. Try your best and don''t get hit.
+
+
+    Press Y for Yes
+    or N for No.'
   typingSpeed: 0.04
-  sceneToLoad: 
+  sceneToLoad: Shape_Jam_Scene
 --- !u!58 &46068887
 CircleCollider2D:
   m_ObjectHideFlags: 0
