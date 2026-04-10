@@ -1455,7 +1455,7 @@ MonoBehaviour:
   finalGradeText: {fileID: 566632127}
   returnDelay: 5
   hallwaySceneName: Hallway_Scene
-  targetBugScore: 90
+  targetBugScore: 100
   passThreshold: 75
   bugWeight: 0.75
   burnoutWeight: 0.25

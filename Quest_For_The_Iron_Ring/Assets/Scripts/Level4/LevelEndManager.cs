@@ -17,7 +17,7 @@ public class LevelEndManager : MonoBehaviour
     [SerializeField] private string hallwaySceneName = "Hallway_Scene";
 
     [Header("Grading Settings")]
-    [SerializeField] private float targetBugScore = 90f;
+    [SerializeField] private float targetBugScore = 100f;
     [SerializeField] private float passThreshold = 75f;
     [SerializeField] private float bugWeight = 0.75f;
     [SerializeField] private float burnoutWeight = 0.25f;
