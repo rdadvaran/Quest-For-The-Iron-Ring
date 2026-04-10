@@ -6,8 +6,9 @@ public class Task3 : MonoBehaviour
 {
     [Header("Level Settings")]
     [SerializeField] private float levelTime = 180f;
-    [SerializeField] private string hubSceneName = "Hub";
+    [SerializeField] private string hubSceneName = "Hallway";
     [SerializeField] private int maxIconsForGrade = 20;
+    [SerializeField] private float endScreenDuration = 10f;
 
     [Header("Phase Times")]
     [SerializeField] private float phase2StartTime = 60f;
@@ -21,7 +22,12 @@ public class Task3 : MonoBehaviour
     [SerializeField] private TMP_Text healthText;
     [SerializeField] private TMP_Text iconText;
     [SerializeField] private TMP_Text phaseText;
-    [SerializeField] private TMP_Text resultText;
+
+    [Header("End Screen UI")]
+    [SerializeField] private GameObject endScreenRoot;
+    [SerializeField] private GameObject winTitleImage;
+    [SerializeField] private GameObject loseTitleImage;
+    [SerializeField] private TMP_Text gradeText;
 
     private float currentTime;
     private bool levelEnded = false;
@@ -31,12 +37,13 @@ public class Task3 : MonoBehaviour
     private PlayerController player;
 
     public int Phase => currentPhase;
+    public int IconsCollected => iconsCollected;
+    public int MaxIconsForGrade => maxIconsForGrade;
 
     private void Start()
     {
         currentTime = levelTime;
 
-        // Try to find the spawned player when level starts
         FindPlayer();
 
         if (projectileSpawner != null)
@@ -44,21 +51,28 @@ public class Task3 : MonoBehaviour
             projectileSpawner.UpdateSpawnTable(currentPhase);
         }
 
+        HideEndScreen();
         UpdateUI();
     }
 
     private void Update()
     {
-        if (levelEnded) return;
+        if (levelEnded)
+        {
+            return;
+        }
 
-        // If player was not found yet, keep trying
         if (player == null)
         {
             FindPlayer();
         }
 
         currentTime -= Time.deltaTime;
-        if (currentTime < 0f) currentTime = 0f;
+
+        if (currentTime < 0f)
+        {
+            currentTime = 0f;
+        }
 
         UpdatePhase();
         UpdateUI();
@@ -72,22 +86,26 @@ public class Task3 : MonoBehaviour
     private void FindPlayer()
     {
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+
         if (playerObject != null)
         {
             player = playerObject.GetComponent<PlayerController>();
         }
     }
 
-
-    public void UpdatePhase()
+    private void UpdatePhase()
     {
         float elapsed = levelTime - currentTime;
         int newPhase = 1;
 
         if (elapsed >= phase3StartTime)
+        {
             newPhase = 3;
+        }
         else if (elapsed >= phase2StartTime)
+        {
             newPhase = 2;
+        }
 
         if (newPhase != currentPhase)
         {
@@ -103,6 +121,7 @@ public class Task3 : MonoBehaviour
     public void AddIcon()
     {
         iconsCollected++;
+
         if (iconsCollected > maxIconsForGrade)
         {
             iconsCollected = maxIconsForGrade;
@@ -113,43 +132,106 @@ public class Task3 : MonoBehaviour
 
     public void LoseLevel()
     {
-        if (levelEnded) return;
-
-        levelEnded = true;
-
-        if (resultText != null)
+        if (levelEnded)
         {
-            resultText.text = "Burnout reached 0\nReturning to Hub...";
+            return;
         }
 
-        Invoke(nameof(ReturnToHub), 2f);
+        levelEnded = true;
+        ShowLoseScreen();
+
+        Invoke(nameof(ReturnToHub), endScreenDuration);
     }
 
     public void WinLevel()
     {
-        if (levelEnded) return;
-
-        levelEnded = true;
-
-        string grade = CalculateGrade();
-
-        if (resultText != null)
+        if (levelEnded)
         {
-            resultText.text = "You Survived!\nGrade: " + grade;
+            return;
         }
 
-        Invoke(nameof(ReturnToHub), 3f);
+        levelEnded = true;
+        ShowWinScreen();
+
+        Invoke(nameof(ReturnToHub), endScreenDuration);
     }
 
-    private string CalculateGrade()
+    private void ShowLoseScreen()
     {
-        float percent = (float)iconsCollected / maxIconsForGrade;
+        if (endScreenRoot != null)
+        {
+            endScreenRoot.SetActive(true);
+        }
 
-        if (percent >= 0.90f) return "A";
-        if (percent >= 0.75f) return "B";
-        if (percent >= 0.60f) return "C";
-        if (percent >= 0.45f) return "D";
-        return "F";
+        if (winTitleImage != null)
+        {
+            winTitleImage.SetActive(false);
+        }
+
+        if (loseTitleImage != null)
+        {
+            loseTitleImage.SetActive(true);
+        }
+
+        if (gradeText != null)
+        {
+            gradeText.gameObject.SetActive(false);
+        }
+    }
+
+    private void ShowWinScreen()
+    {
+        if (endScreenRoot != null)
+        {
+            endScreenRoot.SetActive(true);
+        }
+
+        if (loseTitleImage != null)
+        {
+            loseTitleImage.SetActive(false);
+        }
+
+        if (winTitleImage != null)
+        {
+            winTitleImage.SetActive(true);
+        }
+
+        if (gradeText != null)
+        {
+            gradeText.gameObject.SetActive(true);
+
+            float percent = 0f;
+
+            if (maxIconsForGrade > 0)
+            {
+                percent = ((float)iconsCollected / maxIconsForGrade) * 100f;
+            }
+
+            gradeText.text = Mathf.RoundToInt(percent) + "%";
+        }
+    }
+
+    private void HideEndScreen()
+    {
+        if (endScreenRoot != null)
+        {
+            endScreenRoot.SetActive(false);
+        }
+
+        if (winTitleImage != null)
+        {
+            winTitleImage.SetActive(false);
+        }
+
+        if (loseTitleImage != null)
+        {
+            loseTitleImage.SetActive(false);
+        }
+
+        if (gradeText != null)
+        {
+            gradeText.gameObject.SetActive(false);
+        }
     }
 
     private void ReturnToHub()
