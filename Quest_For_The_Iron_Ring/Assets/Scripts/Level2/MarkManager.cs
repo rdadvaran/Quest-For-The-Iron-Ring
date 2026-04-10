@@ -31,6 +31,7 @@ public class MarkManager : MonoBehaviour
 
     public bool CheckPass()
     {
+        MarkSaver.Instance.SaveGrade("Level2", currentMark);
         return currentMark >= passingGrade;
     }
 }

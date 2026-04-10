@@ -1,20 +1,27 @@
+using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using static System.Net.Mime.MediaTypeNames;
 
-public class PauseManager : MonoBehaviour
+public class Pause_Manager : MonoBehaviour
 {
-    public GameObject pauseMenuUI;
+    public GameObject pauseMenu;
+    public TMP_Text marksText;
+    public Button winButton;
+
     private bool isPaused = false;
 
     void Start()
     {
-        Time.timeScale = 1f;
-        pauseMenuUI.SetActive(false);
+        pauseMenu.SetActive(false);
+
+        if (winButton != null)
+            winButton.gameObject.SetActive(false);
     }
 
     void Update()
     {
-        if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (isPaused)
                 Resume();
@@ -23,17 +30,52 @@ public class PauseManager : MonoBehaviour
         }
     }
 
+    public void Pause()
+    {
+        pauseMenu.SetActive(true);
+        Time.timeScale = 0f;
+        isPaused = true;
+
+        UpdateMarksUI();
+        UpdateWinButton();
+    }
+
     public void Resume()
     {
-        pauseMenuUI.SetActive(false);
+        pauseMenu.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
     }
 
-    public void Pause()
+    private void UpdateMarksUI()
     {
-        pauseMenuUI.SetActive(true);
-        Time.timeScale = 0f;
-        isPaused = true;
+        if (marksText != null && MarkSaver.Instance != null)
+            marksText.text = MarkSaver.Instance.GetAllGradesText();
+    }
+
+    private void UpdateWinButton()
+    {
+        if (winButton == null)
+            return;
+
+        bool canWin = MarkSaver.Instance != null && MarkSaver.Instance.HasPassedAllLevels();
+        winButton.gameObject.SetActive(canWin);
+        Debug.Log("Win Button Updated: " + MarkSaver.Instance.HasPassedAllLevels());
+    }
+
+    public void WinGame()
+    {
+        if (MarkSaver.Instance != null)
+        {
+            MarkSaver.Instance.ResetGrades();
+        }
+
+        Time.timeScale = 1f;
+
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #else
+        Application.Quit();
+        #endif
     }
 }

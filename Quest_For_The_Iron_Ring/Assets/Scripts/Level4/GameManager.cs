@@ -113,7 +113,8 @@ public class GameManager : MonoBehaviour
                 instructionText.text =
                     "WASD - MOVE\n" +
                     "SPACEBAR - SQUASH BUGS\n" +
-                    "AVOID BURNOUT!\n\n" +
+                    "THE BIGBUG NEEDS 3 HITS!\n\n" +
+                    "KEEP THE SCORE HIGH AND BURNOUT LOW!\n\n" +
                     "GAME STARTING IN " + i + "...";
             }
 

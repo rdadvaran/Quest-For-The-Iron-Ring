@@ -136,6 +136,7 @@ public class UIManager : MonoBehaviour
             leve5Grade = 100;
             GameManager5.Instance.isLevel5Completed = true;
         }
+        MarkSaver.Instance.SaveGrade("Level5", leve5Grade);
 
         subText.gameObject.SetActive(true);
         subText.text = passed ? "You passed" : "You failed";
