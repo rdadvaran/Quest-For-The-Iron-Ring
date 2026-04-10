@@ -1352,6 +1352,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1237033101}
   - component: {fileID: 1237033102}
+  - component: {fileID: 1237033103}
   m_Layer: 0
   m_Name: Level5_Manager
   m_TagString: Untagged
@@ -1404,6 +1405,22 @@ MonoBehaviour:
   doorPrefab: {fileID: 2556770878984380466, guid: d997309104970934bbe875af70bcc131, type: 3}
   playerBulletPrefab: {fileID: 7159695470161866627, guid: b7d9215231e900142afbf0a70788857c, type: 3}
   platformSpawnParent: {fileID: 1109227426}
+--- !u!114 &1237033103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1237033100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80bae7e6bf8891243acdd8e9b0fd17bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager5
+  selectedCharacter: Player
+  selectedDifficulty: AverageJoe
+  isLevel5Completed: 0
+  enemiesPushed: 0
 --- !u!1 &1245783678
 GameObject:
   m_ObjectHideFlags: 0
