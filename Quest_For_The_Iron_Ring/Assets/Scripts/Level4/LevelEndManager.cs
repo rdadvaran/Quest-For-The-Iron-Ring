@@ -44,7 +44,13 @@ public class LevelEndManager : MonoBehaviour
 
         float finalGrade = CalculateFinalGrade(score, burnoutLevel, maxBurnout);
 
-        string resultMessage = finalGrade >= passThreshold ? "YOU PASSED" : "YOU FAILED";
+        string resultMessage;
+
+        if (finalGrade >= passThreshold)
+            resultMessage = "YOU PASSED";
+        else
+            resultMessage = "YOU FAILED";
+
         string gradeMessage = "Grade: " + finalGrade.ToString("0") + "%";
 
         StartCoroutine(ShowEndScreenAndReturn(resultMessage, gradeMessage));
@@ -52,10 +58,10 @@ public class LevelEndManager : MonoBehaviour
 
     private float CalculateFinalGrade(float score, int burnoutLevel, int maxBurnout)
     {
-        float bugPercent = 0f;
+        float bugPercent = (score / targetBugScore) * 100f;
 
-        if (targetBugScore > 0f)
-            bugPercent = Mathf.Clamp01(score / targetBugScore) * 100f;
+        if (bugPercent > 100f)
+            bugPercent = 100f;
 
         float burnoutPercent = (1f - ((float)burnoutLevel / maxBurnout)) * 100f;
 
