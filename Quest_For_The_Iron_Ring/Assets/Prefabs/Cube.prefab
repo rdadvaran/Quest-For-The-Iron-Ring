@@ -79,8 +79,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 1570653215
-  m_SortingLayer: 5
+  m_SortingLayerID: 1258498387
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 5752739366588724016, guid: 588bd08ba18f12c4fa25bc13737f87a3, type: 3}
@@ -137,7 +137,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.0001, y: 0.0001}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &1263938854361217563
 MonoBehaviour:
@@ -157,5 +157,5 @@ MonoBehaviour:
   maxX: 5.6
   minY: -4
   maxY: 4
-  iconPrefab: {fileID: 0}
+  iconPrefab: {fileID: 8540924022497386616, guid: 777c3d472a09bdd4ba3de531d0ea28ad, type: 3}
   iconSpawnInterval: 8

@@ -163,7 +163,7 @@ public class Task3 : MonoBehaviour
         {
             int minutes = Mathf.FloorToInt(currentTime / 60f);
             int seconds = Mathf.FloorToInt(currentTime % 60f);
-            timerText.text = "Time: " + minutes.ToString("00") + ":" + seconds.ToString("00");
+            timerText.text = minutes.ToString("00") + ":" + seconds.ToString("00");
         }
 
         if (healthText != null && player != null)
