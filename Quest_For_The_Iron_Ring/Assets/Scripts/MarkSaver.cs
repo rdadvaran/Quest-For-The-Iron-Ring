@@ -136,18 +136,14 @@ public class MarkSaver : MonoBehaviour
 
     public bool CanEnterLevelInOrder(string levelName)
     {
-        // Find index of this level
         int index = System.Array.IndexOf(levelNames, levelName);
 
-        // If not found, block it
         if (index == -1)
             return false;
 
-        // Level1 is always accessible
         if (index == 0)
             return true;
 
-        // Check ALL previous levels
         for (int i = 0; i < index; i++)
         {
             if (!HasPassedLevel(levelNames[i]))
