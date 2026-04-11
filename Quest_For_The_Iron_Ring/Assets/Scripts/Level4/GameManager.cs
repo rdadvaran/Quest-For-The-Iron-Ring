@@ -240,7 +240,7 @@ public class GameManager : MonoBehaviour
 
     private void EndLevelWithGrade()
     {
-        if (gameEnded) return;
+        if (gameEnded || !gameStarted) return;
 
         gameEnded = true;
 

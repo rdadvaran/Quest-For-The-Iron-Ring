@@ -81,6 +81,11 @@ public class playerMovement : MonoBehaviour
         }
     }
 
+    public void SetMoveSpeed(float newSpeed)
+    {
+        currentMoveSpeed = newSpeed;
+    }
+
     public void SetNearbyBug(Bug bug)
     {
         nearbyBug = bug;
