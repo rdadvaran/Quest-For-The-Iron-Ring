@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Character Bonus")]
     [SerializeField] private float burnoutRecoveryInterval = 30f;
+    [SerializeField] private string boostedLevelName = "Level4_BugSquasher";
 
     private float burnoutRecoveryTimer = 0f;
 
@@ -64,12 +65,13 @@ public class GameManager : MonoBehaviour
 
         timer -= Time.deltaTime;
 
-        HandleCharacterBonus(); // 👈 NEW
+        HandleCharacterBonus();
 
         if (timer <= 0f)
         {
             timer = 0f;
             UpdateUI();
+            Debug.Log("Timer reached 0. Attempting to end level.");
             EndLevelWithGrade();
             return;
         }
@@ -79,8 +81,7 @@ public class GameManager : MonoBehaviour
 
     private void HandleCharacterBonus()
     {
-        // Only apply in Level4
-        if (SceneManager.GetActiveScene().name != "Level4")
+        if (SceneManager.GetActiveScene().name != boostedLevelName)
             return;
 
         if (CharacterManager.Instance == null)
@@ -109,15 +110,12 @@ public class GameManager : MonoBehaviour
             case DifficultyManager.Difficulty.IdleSlacker:
                 timer = 75f;
                 break;
-
             case DifficultyManager.Difficulty.AverageJoe:
                 timer = 65f;
                 break;
-
             case DifficultyManager.Difficulty.Goody2Shoes:
                 timer = 60f;
                 break;
-
             case DifficultyManager.Difficulty.Perfectionist:
                 timer = 55f;
                 break;
@@ -203,9 +201,15 @@ public class GameManager : MonoBehaviour
             gameEnded = true;
             UpdateUI();
 
+            Debug.Log("Burnout reached max. Triggering game over.");
+
             if (LevelEndManager.Instance != null)
             {
                 LevelEndManager.Instance.TriggerGameOver();
+            }
+            else
+            {
+                Debug.LogWarning("LevelEndManager.Instance is NULL during game over.");
             }
 
             return;
@@ -240,9 +244,16 @@ public class GameManager : MonoBehaviour
 
         gameEnded = true;
 
+        Debug.Log($"EndLevelWithGrade called. Score={bugsSquashed}, Burnout={burnoutLevel}/{maxBurnout}");
+
         if (LevelEndManager.Instance != null)
         {
+            Debug.Log("LevelEndManager found. Triggering pass/fail.");
             LevelEndManager.Instance.TriggerPassFail(bugsSquashed, burnoutLevel, maxBurnout);
+        }
+        else
+        {
+            Debug.LogWarning("LevelEndManager.Instance is NULL when timer ended.");
         }
     }
 
