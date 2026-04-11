@@ -83,7 +83,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1570653215
-  m_SortingLayer: 5
+  m_SortingLayer: 8
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -1483112127, guid: 8f62b4a3fe9d8ef4fa000013594179fe, type: 3}
@@ -109,6 +109,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::playerMovement
   moveSpeed: 5
+  boostedMoveSpeed: 7
+  boostedLevelName: Level4_BugSquasher
 --- !u!50 &-8785927243203085599
 Rigidbody2D:
   serializedVersion: 5

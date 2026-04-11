@@ -109,6 +109,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::playerMovement
   moveSpeed: 5
+  boostedMoveSpeed: 7
+  boostedLevelName: Level4_BugSquasher
 --- !u!114 &4553656965405926787
 MonoBehaviour:
   m_ObjectHideFlags: 0

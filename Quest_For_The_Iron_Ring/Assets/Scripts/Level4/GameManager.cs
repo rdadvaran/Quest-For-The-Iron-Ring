@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -26,6 +27,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject instructionPanel;
     [SerializeField] private TMP_Text instructionText;
     [SerializeField] private float startDelay = 5f;
+
+    [Header("Character Bonus")]
+    [SerializeField] private float burnoutRecoveryInterval = 30f;
+
+    private float burnoutRecoveryTimer = 0f;
 
     private int fastBugHitCounter = 0;
     private int fastBugKillCounter = 0;
@@ -58,6 +64,8 @@ public class GameManager : MonoBehaviour
 
         timer -= Time.deltaTime;
 
+        HandleCharacterBonus(); // 👈 NEW
+
         if (timer <= 0f)
         {
             timer = 0f;
@@ -67,6 +75,28 @@ public class GameManager : MonoBehaviour
         }
 
         UpdateUI();
+    }
+
+    private void HandleCharacterBonus()
+    {
+        // Only apply in Level4
+        if (SceneManager.GetActiveScene().name != "Level4")
+            return;
+
+        if (CharacterManager.Instance == null)
+            return;
+
+        if (!CharacterManager.Instance.HasLevel4BurnoutRecovery())
+            return;
+
+        burnoutRecoveryTimer += Time.deltaTime;
+
+        if (burnoutRecoveryTimer >= burnoutRecoveryInterval)
+        {
+            burnoutRecoveryTimer = 0f;
+            ReduceBurnout(1);
+            Debug.Log("Burnout reduced by character bonus.");
+        }
     }
 
     private void ApplyDifficultyTimer()
@@ -113,7 +143,8 @@ public class GameManager : MonoBehaviour
                 instructionText.text =
                     "WASD - MOVE\n" +
                     "SPACEBAR - SQUASH BUGS\n" +
-                    "AVOID BURNOUT!\n\n" +
+                    "THE BIGBUG NEEDS 3 HITS!\n\n" +
+                    "KEEP THE SCORE HIGH AND BURNOUT LOW!\n\n" +
                     "GAME STARTING IN " + i + "...";
             }
 
@@ -121,9 +152,7 @@ public class GameManager : MonoBehaviour
         }
 
         if (instructionText != null)
-        {
             instructionText.text = "GO!";
-        }
 
         yield return new WaitForSecondsRealtime(0.5f);
 
@@ -178,10 +207,6 @@ public class GameManager : MonoBehaviour
             {
                 LevelEndManager.Instance.TriggerGameOver();
             }
-            else
-            {
-                Debug.LogWarning("LevelEndManager instance is missing.");
-            }
 
             return;
         }
@@ -211,41 +236,20 @@ public class GameManager : MonoBehaviour
 
     private void EndLevelWithGrade()
     {
-        if (gameEnded) return;
+        if (gameEnded || !gameStarted) return;
 
         gameEnded = true;
-
-        Debug.Log($"Level ended. Score: {bugsSquashed}, Burnout: {burnoutLevel}/{maxBurnout}");
 
         if (LevelEndManager.Instance != null)
         {
             LevelEndManager.Instance.TriggerPassFail(bugsSquashed, burnoutLevel, maxBurnout);
         }
-        else
-        {
-            Debug.LogWarning("LevelEndManager instance is missing.");
-        }
     }
 
-    public int GetBurnoutLevel()
-    {
-        return burnoutLevel;
-    }
-
-    public int GetMaxBurnout()
-    {
-        return maxBurnout;
-    }
-
-    public float GetScore()
-    {
-        return bugsSquashed;
-    }
-
-    public bool HasGameStarted()
-    {
-        return gameStarted;
-    }
+    public int GetBurnoutLevel() => burnoutLevel;
+    public int GetMaxBurnout() => maxBurnout;
+    public float GetScore() => bugsSquashed;
+    public bool HasGameStarted() => gameStarted;
 
     public void RegisterFastBugHit()
     {
