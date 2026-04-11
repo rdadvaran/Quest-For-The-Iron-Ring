@@ -226,7 +226,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &53821055
@@ -1313,8 +1313,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe9d76765d8a771468647309dc9d8bc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Level3PlayerSetup
-  normalSpeed: 5
-  boostedSpeed: 6.5
+  baseMoveSpeed: 8
+  boostedMoveSpeed: 14
+  gamerCharacterName: Gamer_Player
+  aiCharacterName: AI_Player
+  minX: -6
+  maxX: 6
+  minY: -4.275
+  maxY: 5.125
 --- !u!114 &1511074504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1330,6 +1336,7 @@ MonoBehaviour:
   levelTime: 180
   hubSceneName: Hallway_Scene
   maxIconsForGrade: 20
+  finalGrade: 0
   endScreenDuration: 10
   phase2StartTime: 60
   phase3StartTime: 120

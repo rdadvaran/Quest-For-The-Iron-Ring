@@ -6,7 +6,7 @@ public class Task3 : MonoBehaviour
 {
     [Header("Level Settings")]
     [SerializeField] private float levelTime = 180f;
-    [SerializeField] private string hubSceneName = "Hallway";
+    [SerializeField] private string hubSceneName = "Hallway_Scene";
     [SerializeField] private int maxIconsForGrade = 20;
     [SerializeField] public float finalGrade = 0; // finalGrade for jami
     [SerializeField] private float endScreenDuration = 10f;
@@ -152,7 +152,18 @@ public class Task3 : MonoBehaviour
         }
 
         levelEnded = true;
-        finalGrade = ((float)iconsCollected / maxIconsForGrade) * 100f; // finalGrade for jami
+        finalGrade = ((float)iconsCollected / maxIconsForGrade) * 100f;
+
+        if (MarkSaver.Instance != null)
+        {
+            MarkSaver.Instance.SaveGrade("Level3", finalGrade);
+            Debug.Log("Level 3 grade saved: " + finalGrade);
+        }
+        else
+        {
+            Debug.LogWarning("MarkSaver.Instance is null. Level 3 grade was not saved.");
+        }
+
         ShowWinScreen();
 
         Invoke(nameof(ReturnToHub), endScreenDuration);

@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class playerMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 12f;
-    [SerializeField] private float boostedMoveSpeed = 15f;
+    [SerializeField] private float boostedMoveSpeed = 200f;
     [SerializeField] private string boostedLevelName = "Level4";
 
     private Rigidbody2D rb;
@@ -85,6 +85,8 @@ public class playerMovement : MonoBehaviour
     public void SetMoveSpeed(float newSpeed)
     {
         moveSpeed = newSpeed;
+        currentMoveSpeed = newSpeed;
+        Debug.Log("playerMovement speed changed to: " + currentMoveSpeed);
     }
 
     public void SetNearbyBug(Bug bug)
