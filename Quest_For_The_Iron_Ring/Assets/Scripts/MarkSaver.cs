@@ -55,7 +55,7 @@ public class MarkSaver : MonoBehaviour
         float grade = GetGrade(levelName);
         return grade >= passingGrade;
     }
-
+    /*
     // If already passed, they should not enter again
     public bool CanEnterLevel(string levelName)
     {
@@ -85,7 +85,7 @@ public class MarkSaver : MonoBehaviour
 
         return count;
     }
-
+    */    
     public string GetAllGradesText()
     {
         StringBuilder sb = new StringBuilder();
@@ -133,7 +133,7 @@ public class MarkSaver : MonoBehaviour
 
         PlayerPrefs.Save();
     }
-
+    /*
     public bool CanEnterLevelInOrder(string levelName)
     {
         int index = System.Array.IndexOf(levelNames, levelName);
@@ -152,7 +152,7 @@ public class MarkSaver : MonoBehaviour
 
         return true;
     }
-
+    */
     private void OnApplicationQuit()
     {
     #if UNITY_EDITOR
