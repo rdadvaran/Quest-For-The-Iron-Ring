@@ -22,6 +22,9 @@ public class LevelEndManager : MonoBehaviour
     [SerializeField] private float bugWeight = 0.75f;
     [SerializeField] private float burnoutWeight = 0.25f;
 
+    [Header("Save Settings")]
+    [SerializeField] private string levelKey = "Level4_BugSquasher";
+
     private bool endingTriggered = false;
 
     private void Awake()
@@ -90,8 +93,18 @@ public class LevelEndManager : MonoBehaviour
         float burnoutPercent = Mathf.Clamp((1f - ((float)burnoutLevel / safeMaxBurnout)) * 100f, 0f, 100f);
 
         float finalPercent = (bugPercent * bugWeight) + (burnoutPercent * burnoutWeight);
-        MarkSaver.Instance.SaveGrade("Level4", Mathf.Clamp(finalPercent, 0f, 100f));
-        return Mathf.Clamp(finalPercent, 0f, 100f);
+        float clampedFinalPercent = Mathf.Clamp(finalPercent, 0f, 100f);
+
+        if (MarkSaver.Instance != null)
+        {
+            MarkSaver.Instance.SaveGrade(levelKey, clampedFinalPercent);
+        }
+        else
+        {
+            Debug.LogWarning("MarkSaver.Instance is null. Grade was not saved, but end screen will still show.");
+        }
+
+        return clampedFinalPercent;
     }
 
     private IEnumerator ShowEndScreenAndReturn(string message, string grade)
