@@ -112,19 +112,19 @@ public class UIManager : MonoBehaviour
 
         bool passed = false;
 
-        if ((difficulty == "Idle Slacker" || difficulty == "IdleSlacker") && pushed == 1)
+        if ((difficulty == "Idle Slacker" || difficulty == "IdleSlacker") && pushed >= 1)
         {
             passed = true;
             leve5Grade = 50;
             GameManager5.Instance.isLevel5Completed = true;
         }
-        if ((difficulty == "Average Joe" || difficulty == "AverageJoe") && pushed == 2)
+        if ((difficulty == "Average Joe" || difficulty == "AverageJoe") && pushed >= 2)
         {
             passed = true;
             leve5Grade = 70;
             GameManager5.Instance.isLevel5Completed = true;
         }
-        if ((difficulty == "Goody 2 Shoes" || difficulty == "Goody2Shoes") && pushed == 3)
+        if ((difficulty == "Goody 2 Shoes" || difficulty == "Goody2Shoes") && pushed >= 3)
         {
             passed = true;
             leve5Grade = 85;

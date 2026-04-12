@@ -23,7 +23,7 @@ public class LevelEndManager : MonoBehaviour
     [SerializeField] private float burnoutWeight = 0.25f;
 
     [Header("Save Settings")]
-    [SerializeField] private string levelKey = "Level4_BugSquasher";
+    [SerializeField] private string levelKey = "Level4";
 
     private bool endingTriggered = false;
 
